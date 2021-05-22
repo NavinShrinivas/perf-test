@@ -10,5 +10,6 @@
 
 
 ## Project Info:
+> :warning: **All the code present in this repository must be run only on a virtual machine as there is a possibility the code can serious harm the machine.**
 More details to be added in right time :)
 
