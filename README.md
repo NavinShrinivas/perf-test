@@ -6,7 +6,7 @@
 
 * [Rahul Samal](https://github.com/*add_your_link_here*)
 * [P K Navin Shrinivas ](https://github.com/NavinShrinivas)
-* [Praneeth K L](https://github.com/*add_your_link_here*)
+* [Praneeth K L](https://github.com/praneethk002)
 
 
 ## Project Info:
