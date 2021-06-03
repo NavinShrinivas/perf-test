@@ -27,8 +27,61 @@ void *faddcalculator(void* thread_ops){
     //is present in CPU pipelines
     while(true)
     {
-        double chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10; //few x86 architechture have a optimised pipline for fadd
-        (*((ll *)thread_ops))+=10;
+        /*the spam of operations below is beacuse i Observed maximum throughput
+        at 30*19 opetartion for every loops , anything lesser is giving giving a lesser
+        number of max ops and anything higher gives around the same values , 
+        I my guess would be that anything lower than 30*19 operations is faster that the 
+        while loops and more cpu time is spent in while loops than flops , keeping in mind faster
+        c compilers and faster cpus i am settling on 40*19 ops for single while loop*/
+
+        //few x86 architechture have a optimised pipline for fadd
+        
+        double chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        chc_add=v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v2+v3+v4+v5+v6+v7+v8+v9+v10;
+        (*((ll *)thread_ops))+=19*40;
+
+        /*rapidlt acessing this adress was giving very weird segfaults
+        hence increasing ops to 19*40 seems to have fixed that too*/
+        /*i.e new upsation values faster than write times*/
     }
 }
 // void *fsubcalculator(){
@@ -95,7 +148,7 @@ int main(){
     printf("Total time for test :");
     scanf("%i",&time);
     printf("Running tests!\n");
-    fflush(stdin);
+    fflush(stdout);
     pthread_t threads[total_threads];
     ll thread_ops[total_threads];
     for(int i=0;i<total_threads;i++)
