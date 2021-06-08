@@ -65,27 +65,29 @@ void *faddtf(void *oppthread)
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
-        ((struct opscount *)oppthread)->faddpthread+=160*5;
+        int op=160*5;
+        *((ll *)oppthread)+=op;
     }
 }
 int main(){
-    int total_thread,time;
+    int total_thread,t;
     printf("Enter total number of threads : ");
     scanf("%i",&total_thread);
     printf("Time to run the test : ");
-    scanf("%i",&time);
+    scanf("%i",&t);
     struct opscount opcount[total_thread];
     pthread_t thread[total_thread];
     //---------------------start of fadd test----------------------------------
+    ll addarr[total_thread];
     for(int i=0;i<total_thread;i++)
     {
-        opcount[i].faddpthread=0;
-        pthread_create(&thread[i],NULL,faddtf,opcount+i);
+        pthread_create(&thread[i],NULL,faddtf,&addarr[i]);
     }
-    int optime=time/4;
+    int optime=t/4;
     sleep(optime);
     for(int i=0;i<total_thread;i++)
 	{
+        opcount[i].faddpthread=addarr[i];
 		pthread_cancel(thread[i]);// kills the threads
 	}
     ll totalfadd;
@@ -93,9 +95,9 @@ int main(){
     {
         totalfadd+=opcount[i].faddpthread;
     }
-    ll totalfaddpsec=totalfadd/optime;
-    ll faddgflop=totalfaddpsec/1000000000;
-    printf("FADD : %llu GFlops",faddgflop);
+    double totalfaddpsec=totalfadd/optime;
+    double faddgflop=totalfaddpsec/1000000000;
+    printf("FADD : %lf GFlops",faddgflop);
     fflush(stdout);
 
 }
