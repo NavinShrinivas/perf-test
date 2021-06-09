@@ -77,7 +77,7 @@ void* faddtf(void *oppthread)
     }
     return NULL;
 }
-int main(){
+int initfloptest(){
     int total_thread;
     printf("Enter total number of threads : ");
     scanf("%i",&total_thread);
