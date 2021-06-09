@@ -5,7 +5,7 @@
 #include<time.h>
 typedef unsigned long long ll;
 
-struct opscount{
+struct opscount{ //struct to store number of operations per thread per function
     ll faddpthread;
     ll fsubpthread;
     ll fmulpthrea;
@@ -14,10 +14,12 @@ struct opscount{
 /*keeping these two as global variables as thread funtions need these parameters
 during mutithreading control is transffered from the main function hence at luck
 rendering these addresses unacessible by the function leading to seg faults*/ 
-int t;
-ll addarr[256];
-void* faddtf(void *oppthread)
+int t;//stores the total time for testing
+ll addarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
+void* faddtf(void *oppthread) //our thread function
 {
+    /*registers to avoid caching and to save the time taken to fetch data from
+    memory*/
     register double c=0.75665;
     register double v1=0.3452345543e-2,v2=0.2342342344e-5,v3=0.2534534523e-4;
     register double v4=0.6575676788e-5,v5=0.2345564656e-2,v6=0.3456573453e-3;
@@ -75,7 +77,7 @@ void* faddtf(void *oppthread)
             flag=false;
         }
     }
-    return NULL;
+    return NULL;//void* hence NULL
 }
 int initfloptest(){
     int total_thread;
@@ -89,16 +91,16 @@ int initfloptest(){
     for(int i=0;i<total_thread;i++)
     {
         addarr[i]=0;
-        pthread_create(&thread[i],NULL,faddtf,&addarr[i]);
+        pthread_create(&thread[i],NULL,faddtf,&addarr[i]); //creates the thread
     }
-    int optime=t/4;
+    int optime=t/4;//time per function
     for(int i=0;i<total_thread;i++)
 	{
-		pthread_join(thread[i],NULL);// waits for the thread fo finish
+		pthread_join(thread[i],NULL);// waits for the thread fo finish , finish condition being NULL
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].faddpthread=addarr[i];
+        opcount[i].faddpthread=addarr[i];//transffers values from temp array to struct
     }
     ll totalfadd;
     ll maxfadd=0;
