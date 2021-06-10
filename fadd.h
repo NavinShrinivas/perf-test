@@ -1,0 +1,1 @@
+void* faddtf(void *oppthread);
