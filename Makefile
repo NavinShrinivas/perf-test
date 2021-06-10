@@ -1,7 +1,9 @@
-all : FLOPanalyzer.o main.o
+all : fadd.o fmul.o FLOPanalyzer.o main.o
+fadd.o : fadd.c
+	gcc -c fadd.c
+fmul.o : fmul.c
+	gcc -c fmul.c
 FLOPanalyzer.o : FLOPanalyzer.c
-	gcc -c fmul.c;\
-	gcc -c fadd.c;\
 	gcc -c FLOPanalyzer.c -lpthread
 main.o : main.c FLOPanalyzer.c
 	gcc fmul.o fadd.o FLOPanalyzer.o main.c -o tester.o -lpthread;\
