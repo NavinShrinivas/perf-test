@@ -19,14 +19,20 @@ during mutithreading control is transffered from the main function hence at luck
 rendering these addresses unacessible by the function leading to seg faults*/ 
 int t;//stores the total time for testing
 ll addarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
+ll mularr[256];
+int total_thread;
 
 int initfloptest(){
-    
-    int total_thread;
-    printf("Enter total number of threads : ");
-    scanf("%i",&total_thread);
-    printf("Time to run the test [Seconds] : ");
-    scanf("%i",&t);
+    if(total_thread==0) //for optional menu options!
+    {
+        printf("Enter total number of threads : ");
+        scanf("%i",&total_thread);
+    }
+    if(t==0) //optional menu options!
+    {
+        printf("Time to run the test [Seconds] : ");
+        scanf("%i",&t);
+    }
     printf("Running test for %i seconds!\n",t);
     fflush(stdout);
     struct opscount opcount[total_thread];
@@ -46,7 +52,7 @@ int initfloptest(){
 	{
         opcount[i].faddpthread=addarr[i];//transffers values from temp array to struct
     }
-    ll totalfadd;
+    ll totalfadd=0;
     ll maxfadd=0;
     for(int i=0;i<total_thread;i++)
     {
@@ -63,8 +69,8 @@ int initfloptest(){
     //---------------------start of fmul test----------------------------------
     for(int i=0;i<total_thread;i++)
     {
-        addarr[i]=0;
-        pthread_create(&thread[i],NULL,fmultf,&addarr[i]); //creates the thread
+        mularr[i]=0;
+        pthread_create(&thread[i],NULL,fmultf,&mularr[i]); //creates the thread
     }
     for(int i=0;i<total_thread;i++)
 	{
@@ -72,9 +78,9 @@ int initfloptest(){
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].fmulpthread=addarr[i];//transffers values from temp array to struct
+        opcount[i].fmulpthread=mularr[i];//transffers values from temp array to struct
     }
-    ll totalfmul;
+    ll totalfmul=0;
     ll maxfmul=0;
     for(int i=0;i<total_thread;i++)
     {
