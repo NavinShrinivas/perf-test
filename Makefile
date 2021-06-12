@@ -8,7 +8,7 @@ fmul.o : fmul.c
 	gcc -c fmul.c
 FLOPanalyzer.o : FLOPanalyzer.c
 	gcc -c FLOPanalyzer.c -lpthread
-texter.o : main.c FLOPanalyzer.c
+tester.o : main.c FLOPanalyzer.c
 	gcc fmul.o fadd.o FLOPanalyzer.o main.c -o tester.o -pthread
 tester.exe :  main.c FLOPanalyzer.c
 	gcc fmul.o fadd.o FLOPanalyzer.o main.c -o tester.exe -pthread
