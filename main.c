@@ -1,6 +1,12 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
+#ifdef _WIN32
+#include<conio.h>
+#define clrscr() printf("\e[1;1H\e[2J")
+#else
+#define clrscr() system("clear")
+#endif
 int main(int argc, char* argv[]){
     if(argc>=2)
     {
@@ -10,6 +16,8 @@ int main(int argc, char* argv[]){
             printf("List of available module:\n");
             printf("1.floptest\n");
             printf("\t Usage : ./tester.o floptest [Number of threads] [time in seconds]\n");
+            printf("2.menu\n");
+            printf("\t Usage : ./tester.o menu 'Opens the menu driven part of the program'\n");
         }
         else if(strcmp(argv[1],"floptest")==0)
         {
@@ -28,6 +36,7 @@ int main(int argc, char* argv[]){
             int choice;
             while(1)
             {
+                clrscr();
                 //menu
                 printf("---------------HARDWARE TESTER---------------\n");
                 printf("1.Floating point operation test [Flops's]\n");
@@ -35,7 +44,11 @@ int main(int argc, char* argv[]){
                 printf("Enter your choice :");
                 scanf("%i",&choice);
                 if(choice==1)
+                {
+                    clrscr();
                     initfloptest();
+                    clrscr();
+                }
                 else if(choice==2)
                     return 0;
             }

@@ -94,12 +94,11 @@ int initfloptest(){
     double fmulgflop=totalfmulpsec/1000000000;
     printf("FMUL : %lf GFlops [Maximum throughput]\n",fmulgflop);
     printf("FMUL : %lf GFlops [Maximim single thread throughput]\n",maxfmulgflop);
+    fflush(stdout);
+    fflush(stdin);
+    printf("Press Enter to go back to return.");
+    char garbage;
+    scanf("%c",&garbage);
+    scanf("%c",&garbage);
+    return 0;
 }
-
-
-
-
-
-
-
-

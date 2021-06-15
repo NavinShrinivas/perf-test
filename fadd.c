@@ -59,7 +59,7 @@ void* faddtf(void *oppthread) //our thread function
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
         c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;c+=v1+v2+v3+v4+v5;c+=v6+v7+v8+v9+v10;
-        int op=160*5;
+        int op=160*5; //30*19
         *((ll *)oppthread)+=op;
         if(time(NULL)-start>=(t/4))
         {
