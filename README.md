@@ -1,7 +1,7 @@
 > :warning: **All the code present in this repository must be run preferably on a virtual machine as there is a possibility the code can harm the machine!Any how a force reboot should fix it.**
 # Perf-test
 
-<p>This project got its life as part of sem-2 C-Lab mini project!</p>
+<p>This project got its life as part of UE20CS152 course</p>
 
 # Project Contributors:
 
