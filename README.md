@@ -16,9 +16,11 @@
   ```
   $ git clone https://github.com/NavinShrinivas/perf-test
   
-  $ cd perf-test
+  $ cd perf-test/src
   
-  $ make all
+  $ make all 
+  
+  $ cd .. && cd build/executables
   
   $ ./tester.o
   ```
@@ -26,11 +28,13 @@
   ```
   git clone https://github.com/NavinShrinivas/perf-test
   
-  cd perf-test
+  cd perf-test/src
   
   make winall
   
-  ./tester.exe
+  cd .. && cd build/executables
+  
+  tester.exe
   ```
  To see all the possible modules you must execute
  ```
