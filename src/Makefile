@@ -18,12 +18,12 @@ clean:
 	rm -r ../build/fadd.o;\
 	rm -r ../build/executables/tester.exe;\
 	tm -r ../build/fmul.o
-winclean:
+winclean :
 	del /f ../build/FLOPanalyzer.o;
 	del /f ../build/executables/tester.o;
 	del /f ../build/executables/tester.exe;
 	del /f ../build/fadd.o;
 	del /f ../build/fmul.o
-floptest:
+floptest :
 	gcc FLOPanalyzer.c -o floptest.o -pthread
 	echo "ouput file : floptest.o"

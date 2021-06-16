@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
                 initfloptest();
             }
         }
-        else if(strcmp(argv[1],"menu")==0) //optionla menu driven program!
+        else if(strcmp(argv[1],"menu")==0) //optional menu driven program!
         {
             int choice;
             while(1)
