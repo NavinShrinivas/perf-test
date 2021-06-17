@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
-#ifdef defined(_WIN32) || defined(WIN32) //trying porable clrscr()
-#include<conio.h>
+#ifdef _WIN32 || WIN32 //trying porable clrscr()
+#define clrscr() system("cls")
 #else
 #define clrscr() system("clear")
 #endif
+char garbage;
 int main(int argc, char* argv[]){
     if(argc>=2)
     {
@@ -50,6 +51,13 @@ int main(int argc, char* argv[]){
                 }
                 else if(choice==2)
                     return 0;
+                else
+                {
+                    printf("Plese enter a correct option.Press enter to continue!");
+                    fflush(stdout);
+                    fflush(stdin);  
+                    scanf("%c",&garbage);
+                }
             }
         }
         else{
