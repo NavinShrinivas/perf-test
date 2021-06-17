@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
-#ifdef _WIN32
+#ifdef defined(_WIN32) || defined(WIN32) //trying porable clrscr()
 #include<conio.h>
-#define clrscr() printf("cls")
+#define clrscr()
 #else
 #define clrscr() system("clear")
 #endif
