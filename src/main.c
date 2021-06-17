@@ -3,7 +3,6 @@
 #include "FLOPanalyzer.h"
 #ifdef defined(_WIN32) || defined(WIN32) //trying porable clrscr()
 #include<conio.h>
-#define clrscr()
 #else
 #define clrscr() system("clear")
 #endif
