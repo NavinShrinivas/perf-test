@@ -99,6 +99,5 @@ int initfloptest(){
     printf("Press Enter to go back to return.");
     char garbage;
     scanf("%c",&garbage);
-    scanf("%c",&garbage);
     return 0;
 }
