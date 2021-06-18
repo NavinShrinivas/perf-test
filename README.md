@@ -44,3 +44,31 @@
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
   ```./tester.o menu```
 
+## project file structure 
+  ```
+    .
+  ├── build
+  │   ├── executables
+  │   │   ├── placeholder.txt
+  │   │   └── tester.o
+  │   ├── fadd.o
+  │   ├── FLOPanalyzer.o
+  │   └── fmul.o
+  ├── files
+  │   ├── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS-converted.pdf
+  │   └── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS.docx
+  ├── LICENSE
+  ├── MEManalyzer.c
+  ├── README.md
+  └── src
+      ├── floatfuncs
+      │   ├── fadd.c
+      │   ├── fadd.h
+      │   ├── fmul.c
+      │   └── fmul.h
+      ├── FLOPanalyzer.c
+      ├── FLOPanalyzer.h
+      ├── main.c
+      └── Makefile
+  ```
+
