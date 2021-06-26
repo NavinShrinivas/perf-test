@@ -46,14 +46,9 @@
 
 ## project file structure 
   ```
-    .
+  .
   ├── build
-  │   ├── executables
-  │   │   ├── placeholder.txt
-  │   │   └── tester.o
-  │   ├── fadd.o
-  │   ├── FLOPanalyzer.o
-  │   └── fmul.o
+  │   └── executables
   ├── files
   │   ├── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS-converted.pdf
   │   └── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS.docx
