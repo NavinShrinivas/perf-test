@@ -3,15 +3,15 @@ all : fadd.o fmul.o FLOPanalyzer.o tester.o
 winall : fadd.o fmul.o FLOPanalyzer.o tester.exe
 
 fadd.o : ./floatfuncs/fadd.c
-	gcc -c ./floatfuncs/fadd.c -o ../build/fadd.o
+	gcc -c ./floatfuncs/fadd.c -o ../build/fadd.o -O0
 fmul.o : ./floatfuncs/fmul.c
-	gcc -c ./floatfuncs/fmul.c -o ../build/fmul.o
+	gcc -c ./floatfuncs/fmul.c -o ../build/fmul.o -O0
 FLOPanalyzer.o : FLOPanalyzer.c
-	gcc -c FLOPanalyzer.c -o ../build/FLOPanalyzer.o -lpthread
+	gcc -c FLOPanalyzer.c -o ../build/FLOPanalyzer.o -lpthread -O0
 tester.o : main.c FLOPanalyzer.c
-	gcc ../build/fmul.o ../build/fadd.o ../build/FLOPanalyzer.o main.c -o ../build/executables/tester.o -pthread
+	gcc ../build/fmul.o ../build/fadd.o ../build/FLOPanalyzer.o main.c -o ../build/executables/tester.o -pthread -O0
 tester.exe :  main.c FLOPanalyzer.c
-	gcc ../build/fmul.o ../build/fadd.o ../build/FLOPanalyzer.o main.c -o ../build/executables/tester.exe -pthread
+	gcc ../build/fmul.o ../build/fadd.o ../build/FLOPanalyzer.o main.c -o ../build/executables/tester.exe -pthread -O0
 clean:
 	rm -r ../build/FLOPanalyzer.o;\
 	rm -r ../build/executables/tester.o;\
