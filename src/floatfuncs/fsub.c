@@ -19,6 +19,10 @@ void* fsubtf(void *oppthread) //our thread function
     bool flag=true;
     while(flag)
     {
+        if((time(NULL)-start)%2 == 0)
+        {
+            cfsec[(time(NULL)-start)/2]+=*((ll *)oppthread);
+        }
         c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;
         c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;
         c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;c-=v1-v2-v3-v4-v5;c-=v6-v7-v8-v9-v10;

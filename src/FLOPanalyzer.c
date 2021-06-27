@@ -12,12 +12,33 @@ struct opscount{ //struct to store number of operations per thread per function
     ll fsubpthread;
     ll fdivpthread;
 };
+
+void dateformat(char* foldername)
+{
+    printf("HALO1");
+    time_t dt=time(NULL);
+    struct tm datetime= *localtime(&dt);
+    printf("HALO2");
+    // printf("now: %d-%02d-%02d %02d:%02d:%02d\n", date.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+    /* ddmmyyyyhhmm will be the folder name*/
+    char day[5],month[5],year[5],hours[5],minutes[5];
+    sprintf(day,"%f",datetime.tm_mday);
+    sprintf(month,"%f",(datetime.tm_mon+1));
+    sprintf(year,"%f",(datetime.tm_year+1900));
+    sprintf(hours,"%f",datetime.tm_hour);
+    sprintf(minutes,"%f",datetime.tm_mday);
+    printf("HALO");
+    snprintf(foldername,sizeof(foldername),"%s: %s: %s: %s: %s",day,month,year,hours,minutes);
+}
+
+
 /*keeping these two as global variables as thread funtions need these parameters
 during mutithreading control is transffered from the main function hence at luck
 rendering these addresses unacessible by the function leading to seg faults*/ 
 int t;//stores the total time for testing
 ll subarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
 ll divarr[256];
+ll cfsec[32];
 int total_thread;
 
 int initfloptest(){;
@@ -92,8 +113,14 @@ int initfloptest(){;
     double fdivgflop=totalfdivpsec/1000000000;
     printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
+    char foldername[10];
+    printf("HALO3");
+    dateformat(foldername);
+    printf("%s",foldername);
     printf("Press Enter to go back to return.");
     char garbage;
     scanf("%c",&garbage);
+    if(garbage=='\n')
+        return 0;
     scanf("%c",&garbage);   
 }

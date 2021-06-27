@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
-#ifdef _WIN32 || WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
+#ifdef _WIN32 || WIN32 //trying porable clrscr() and NPROCESSORS_ONLN macro
 #define clrscr() system("cls")
 #include<windows.h>
 SYSTEM_INFO sysinfo;
