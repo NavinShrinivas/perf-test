@@ -19,11 +19,19 @@ int main(int argc, char* argv[]){
         printf("Argument entered :%s \n",argv[1]);
         if(strcmp(argv[1],"help")==0)
         {
-            printf("List of available module:\n");
+            printf("Usage : ./tester.o [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
+            printf("List of available options:\n");
             printf("1.floptest\n");
-            printf("\t Usage : ./tester.o floptest [Number of threads] [time in seconds]\n");
+            printf("   Arguments :\n");
+            printf("   option_name : floptest \n");
+            printf("   Arg1 : Total number of threads\n");
+            printf("   Arg2 : Total time for testing\n");
             printf("2.menu\n");
-            printf("\t Usage : ./tester.o menu 'Opens the menu driven part of the program'\n");
+            printf("   option_name : menu \n");
+            printf("   Arguments : NO ARGUMENTS\n");
+            printf("3.stdtest\n");
+            printf("   option_name : stdtest \n");
+            printf("   Arguments : NO ARGUMENTS\n");
         }
         else if(strcmp(argv[1],"floptest")==0)
         {
@@ -74,6 +82,12 @@ int main(int argc, char* argv[]){
                     scanf("%c",&garbage);
                 }
             }
+        }
+        else if(strcmp(argv[1],"stdtest")==0)
+        {
+            total_thread=cores; //extern vars, I am sick of passing varibles around.
+            t=60; //extern vars, I am sick of passing varibles around.
+            initfloptest();
         }
         else{
             printf("Please enter a valid argument!\n");

@@ -20,7 +20,7 @@ ll subarr[256];//a temp array to stroe values in the thread function , assumin m
 ll divarr[256];
 int total_thread;
 
-int initfloptest(){
+int initfloptest(){;
     if(total_thread==0) //for optional menu options!
     {
         printf("Enter total number of threads : ");
@@ -76,7 +76,7 @@ int initfloptest(){
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].fdivpthread=divarr[i];//transffers values from temp array to struct
+        opcount[i].fdivpthread=divarr[i];//transfers values from temp array to struct
     }
     ll totalfdiv=0;
     ll maxfdiv=0;
@@ -92,8 +92,6 @@ int initfloptest(){
     double fdivgflop=totalfdivpsec/1000000000;
     printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
-    fflush(stdout);
-    fflush(stdin);
     printf("Press Enter to go back to return.");
     char garbage;
     scanf("%c",&garbage);
