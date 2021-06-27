@@ -1,10 +1,16 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
-#ifdef _WIN32 || WIN32 //trying porable clrscr()
+#ifdef _WIN32 || WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
+#include<windows.h>
+SYSTEM_INFO sysinfo;
+GetSystemInfo(&sysinfo);
+#define cores sysinfo.dwNumberOfProcessors
 #else
 #define clrscr() system("clear")
+#include<unistd.h>
+#define cores sysconf(_SC_NPROCESSORS_ONLN)
 #endif
 char garbage;
 int main(int argc, char* argv[]){
@@ -40,7 +46,7 @@ int main(int argc, char* argv[]){
                 //menu
                 printf("---------------HARDWARE TESTER---------------\n");
                 printf("1.Custom Floating point operation test\n");
-                printf("Standard test [60 seconds] \n");
+                printf("2.Standard test [60 seconds] \n");
                 printf("3.Exit\n");
                 printf("Enter your choice :");
                 scanf("%i",&choice);
@@ -51,6 +57,10 @@ int main(int argc, char* argv[]){
                     clrscr();
                 }
                 else if(choice==2)
+                {
+
+                }
+                else if(choice==3)
                     return 0;
                 else
                 {
