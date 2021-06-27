@@ -39,8 +39,9 @@ int main(int argc, char* argv[]){
                 clrscr();
                 //menu
                 printf("---------------HARDWARE TESTER---------------\n");
-                printf("1.Floating point operation test [Flops's]\n");
-                printf("2.Exit\n");
+                printf("1.Custom Floating point operation test\n");
+                printf("Standard test [60 seconds] \n");
+                printf("3.Exit\n");
                 printf("Enter your choice :");
                 scanf("%i",&choice);
                 if(choice==1)

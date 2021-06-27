@@ -1,0 +1,12 @@
+{
+    "ID": {
+        "$numberLong": "1"
+    },
+    "Rank": {
+        "$numberLong": "0"
+    },
+    "CPU_name": "",
+    "Test_result": {
+        "$numberDouble": "0.0"
+    }
+}
