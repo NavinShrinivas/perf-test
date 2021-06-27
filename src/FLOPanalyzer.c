@@ -3,23 +3,21 @@
 #include<unistd.h>
 #include<stdbool.h>
 #include<time.h>
-#include"./floatfuncs/fadd.h"
-#include"./floatfuncs/fmul.h"
+#include"./floatfuncs/fsub.h"
+#include"./floatfuncs/fdiv.h"
 
 typedef unsigned long long ll;
 
 struct opscount{ //struct to store number of operations per thread per function
-    ll faddpthread;
     ll fsubpthread;
-    ll fmulpthread;
     ll fdivpthread;
 };
 /*keeping these two as global variables as thread funtions need these parameters
 during mutithreading control is transffered from the main function hence at luck
 rendering these addresses unacessible by the function leading to seg faults*/ 
 int t;//stores the total time for testing
-ll addarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
-ll mularr[256];
+ll subarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
+ll divarr[256];
 int total_thread;
 
 int initfloptest(){
@@ -37,11 +35,11 @@ int initfloptest(){
     fflush(stdout);
     struct opscount opcount[total_thread];
     pthread_t thread[total_thread];
-    //---------------------start of fadd test----------------------------------
+    //---------------------start of fsub test----------------------------------
     for(int i=0;i<total_thread;i++)
     {
-        addarr[i]=0;
-        pthread_create(&thread[i],NULL,faddtf,&addarr[i]); //creates the thread
+        subarr[i]=0;
+        pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); //creates the thread
     }
     int optime=t/4;//time per function
     for(int i=0;i<total_thread;i++)
@@ -50,27 +48,27 @@ int initfloptest(){
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].faddpthread=addarr[i];//transffers values from temp array to struct
+        opcount[i].fsubpthread=subarr[i];//transffers values from temp array to struct
     }
-    ll totalfadd=0;
-    ll maxfadd=0;
+    ll totalfsub=0;
+    ll maxfsub=0;
     for(int i=0;i<total_thread;i++)
     {
-        if(maxfadd<opcount[i].faddpthread)
-            maxfadd=opcount[i].faddpthread;
-        totalfadd+=opcount[i].faddpthread;
+        if(maxfsub<opcount[i].fsubpthread)
+            maxfsub=opcount[i].fsubpthread;
+        totalfsub+=opcount[i].fsubpthread;
     }
-    double totalfaddpsec=totalfadd/optime;
-    double maxfaddpsec=maxfadd/optime;
-    double maxfaddgflop=maxfaddpsec/1000000000;
-    double faddgflop=totalfaddpsec/1000000000;
-    printf("FADD : %lf GFlops [Maximum throughput]\n",faddgflop);
-    printf("FADD : %lf GFlops [Maximim single thread throughput]\n",maxfaddgflop);
-    //---------------------start of fmul test----------------------------------
+    double totalfsubpsec=totalfsub/optime;
+    double maxfsubpsec=maxfsub/optime;
+    double maxfsubgflop=maxfsubpsec/1000000000;
+    double fsubgflop=totalfsubpsec/1000000000;
+    printf("FSUB : %lf GFlops [Maximum throughput]\n",fsubgflop);
+    printf("FSUB : %lf GFlops [Maximim single thread throughput]\n",maxfsubgflop);
+    //---------------------start of fdiv test----------------------------------
     for(int i=0;i<total_thread;i++)
     {
-        mularr[i]=0;
-        pthread_create(&thread[i],NULL,fmultf,&mularr[i]); //creates the thread
+        divarr[i]=0;
+        pthread_create(&thread[i],NULL,fdivtf,&divarr[i]); //creates the thread
     }
     for(int i=0;i<total_thread;i++)
 	{
@@ -78,26 +76,26 @@ int initfloptest(){
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].fmulpthread=mularr[i];//transffers values from temp array to struct
+        opcount[i].fdivpthread=divarr[i];//transffers values from temp array to struct
     }
-    ll totalfmul=0;
-    ll maxfmul=0;
+    ll totalfdiv=0;
+    ll maxfdiv=0;
     for(int i=0;i<total_thread;i++)
     {
-        if(maxfmul<opcount[i].fmulpthread)
-            maxfmul=opcount[i].fmulpthread;
-        totalfmul+=opcount[i].fmulpthread;
+        if(maxfdiv<opcount[i].fdivpthread)
+            maxfdiv=opcount[i].fdivpthread;
+        totalfdiv+=opcount[i].fdivpthread;
     }
-    double totalfmulpsec=totalfmul/optime;
-    double maxfmulpsec=maxfmul/optime;
-    double maxfmulgflop=maxfmulpsec/1000000000;
-    double fmulgflop=totalfmulpsec/1000000000;
-    printf("FMUL : %lf GFlops [Maximum throughput]\n",fmulgflop);
-    printf("FMUL : %lf GFlops [Maximim single thread throughput]\n",maxfmulgflop);
+    double totalfdivpsec=totalfdiv/optime;
+    double maxfdivpsec=maxfdiv/optime;
+    double maxfdivgflop=maxfdivpsec/1000000000;
+    double fdivgflop=totalfdivpsec/1000000000;
+    printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
+    printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
     fflush(stdout);
     fflush(stdin);
     printf("Press Enter to go back to return.");
     char garbage;
     scanf("%c",&garbage);
-    return 0;
+    scanf("%c",&garbage);   
 }

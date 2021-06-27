@@ -1,0 +1,1 @@
+void* fdivtf(void *oppthread);

@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
                 //menu
                 printf("---------------HARDWARE TESTER---------------\n");
                 printf("1.Custom Floating point operation test\n");
-                printf("2.Standard test [60 seconds] \n");
+                printf("2.Standard test [60 seconds] for ranking \n");
                 printf("3.Exit\n");
                 printf("Enter your choice :");
                 scanf("%i",&choice);
@@ -58,7 +58,11 @@ int main(int argc, char* argv[]){
                 }
                 else if(choice==2)
                 {
-
+                    total_thread=cores;
+                    t=60;
+                    clrscr();
+                    initfloptest();
+                    clrscr();
                 }
                 else if(choice==3)
                     return 0;
