@@ -18,9 +18,12 @@ rendering these addresses unacessible by the function leading to seg faults*/
 int t;//stores the total time for testing
 ll subarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
 ll divarr[256];
+ll tsec[32];
+int stdflag;
 int total_thread;
 
-int initfloptest(){;
+int initfloptest(){
+    char* garbage;
     if(total_thread==0) //for optional menu options!
     {
         printf("Enter total number of threads : ");
@@ -30,6 +33,17 @@ int initfloptest(){;
     {
         printf("Time to run the test [Seconds] : ");
         scanf("%i",&t);
+    }
+    if(t<=4 || total_thread <=1 | total_thread%2!=0)
+    {
+        printf("Invalid aruguments \n");
+        printf("Possible errors: \n");
+        printf("[time] < 4 \n");
+        printf("[threads] < 2 OR thrads not in multiples of 2 \n");
+        printf("Press Enter to go back to return.");
+        scanf("%c",&garbage);
+        scanf("%c",&garbage);   
+        return 0;
     }
     printf("Running test for %i seconds!\n",t);
     fflush(stdout);
@@ -93,7 +107,21 @@ int initfloptest(){;
     printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
     printf("Press Enter to go back to return.");
-    char garbage;
     scanf("%c",&garbage);
     scanf("%c",&garbage);   
+    fflush(stdout);
+    fflush(stdin);
+    if(!stdflag)
+    {
+        FILE* f=fopen("result.txt","w+");
+        fclose(f);
+        f=fopen("result.txt","w");
+        for(int i=0;i<32;i++)
+        {
+            printf("%lf\n",tsec[i]);
+            fprintf(f,"%d %lf\n",i*2,tsec[i]);
+        }
+        fclose(f);
+    }
+    
 }

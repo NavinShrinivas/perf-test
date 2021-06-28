@@ -60,6 +60,8 @@ int main(int argc, char* argv[]){
                 scanf("%i",&choice);
                 if(choice==1)
                 {
+                    t=0;
+                    total_thread=0;
                     clrscr();
                     initfloptest();
                     clrscr();
@@ -68,6 +70,7 @@ int main(int argc, char* argv[]){
                 {
                     total_thread=cores;
                     t=60;
+                    stdflag=1;
                     clrscr();
                     initfloptest();
                     clrscr();
@@ -87,6 +90,7 @@ int main(int argc, char* argv[]){
         {
             total_thread=cores; //extern vars, I am sick of passing varibles around.
             t=60; //extern vars, I am sick of passing varibles around.
+            stdflag=1;
             initfloptest();
         }
         else{
