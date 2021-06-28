@@ -32,6 +32,9 @@ int main(int argc, char* argv[]){
             printf("3.stdtest\n");
             printf("   option_name : stdtest \n");
             printf("   Arguments : NO ARGUMENTS\n");
+            printf("4.research\n");
+            printf("   option_name : research \n");
+            printf("   Arguments : NO ARGUMENTS\n");
         }
         else if(strcmp(argv[1],"floptest")==0)
         {
@@ -55,7 +58,8 @@ int main(int argc, char* argv[]){
                 printf("---------------HARDWARE TESTER---------------\n");
                 printf("1.Custom Floating point operation test\n");
                 printf("2.Standard test [60 seconds] for ranking \n");
-                printf("3.Exit\n");
+                printf("3.Research based test\n");
+                printf("4.Exit\n");
                 printf("Enter your choice :");
                 scanf("%i",&choice);
                 if(choice==1)
@@ -76,6 +80,14 @@ int main(int argc, char* argv[]){
                     clrscr();
                 }
                 else if(choice==3)
+                {
+                    total_thread=cores;
+                    t=60;
+                    clrscr();
+                    research();
+                    clrscr();
+                }
+                else if(choice==4)
                     return 0;
                 else
                 {
@@ -92,6 +104,12 @@ int main(int argc, char* argv[]){
             t=60; //extern vars, I am sick of passing varibles around.
             stdflag=1;
             initfloptest();
+        }
+        else if(strcmp(argv[1],"research")==0)
+        {
+            t=60;
+            total_thread=cores;
+            research();
         }
         else{
             printf("Please enter a valid argument!\n");

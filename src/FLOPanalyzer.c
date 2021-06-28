@@ -5,6 +5,7 @@
 #include<time.h>
 #include"./floatfuncs/fsub.h"
 #include"./floatfuncs/fdiv.h"
+#include"./floatfuncs/research.h"
 
 typedef unsigned long long ll;
 
@@ -45,7 +46,7 @@ int initfloptest(){
         scanf("%c",&garbage);   
         return 0;
     }
-    printf("Running test for %i seconds!\n",t);
+    printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     fflush(stdout);
     struct opscount opcount[total_thread];
     pthread_t thread[total_thread];
@@ -111,17 +112,63 @@ int initfloptest(){
     scanf("%c",&garbage);   
     fflush(stdout);
     fflush(stdin);
-    if(!stdflag)
-    {
-        FILE* f=fopen("result.txt","w+");
-        fclose(f);
-        f=fopen("result.txt","w");
-        for(int i=0;i<32;i++)
-        {
-            printf("%lf\n",tsec[i]);
-            fprintf(f,"%d %lf\n",i*2,tsec[i]);
-        }
-        fclose(f);
-    }
-    
 }
+
+int research(){
+    char* garbage;
+    ll tsecbuffer[12]; 
+    /*had to make this an array due to stupid behviours due to race conditions 
+    and trying to achive eventual consistency.*/
+    pthread_t thread[total_thread];
+    printf("Running test for %i seconds on %d threads!\n",t,total_thread);
+    ll tsecbuffer2;
+    for(int j=0;j<10;j++)
+    {
+        if(j==0)
+            tsec[j]=0;
+        else{
+        int temp = tsecbuffer2/1000000000;
+        tsec[j]=temp;
+        }
+        for(int i=0;i<total_thread;i++)
+        {
+            tsecbuffer[i]=0;
+            pthread_create(&thread[i],NULL,researchtf,&tsecbuffer[i]); //creates the thread
+        }
+        for(int i=0;i<total_thread;i++)
+	    {
+		    pthread_join(thread[i],NULL);// waits for the thread fo finish , finish condition being NULL
+	    }
+        tsecbuffer2=0;
+        for(int i=0;i<12;i++)
+        {
+            tsecbuffer2+=tsecbuffer[i];
+            tsecbuffer[i]=0;
+        }
+    }
+    FILE* f=fopen("result.txt","w+");
+    fclose(f);
+    f=fopen("result.txt","w");
+    printf("Flushing data to file...\n");
+    fflush(stdout);
+    fflush(stdin);
+    for(int i=0;i<30;i++)
+    {
+        fprintf(f,"%d %lli\n",i*2,tsec[i]);
+    }
+    fclose(f);
+    sleep(3);
+    char cwd[1000];
+    getcwd(cwd,sizeof(cwd));
+    printf("Results flushed to %s/results.txt \n",cwd);
+    printf("Graphs stored and rendered!\n");
+    /*we should have this part plotting data from "results.txt"*/
+    //not coded yet
+    printf("Press Enter to go back to return.");
+    scanf("%c",&garbage);
+    scanf("%c",&garbage);   
+    fflush(stdout);
+    fflush(stdin);
+
+}
+

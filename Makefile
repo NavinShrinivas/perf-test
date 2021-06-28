@@ -1,4 +1,4 @@
-all : fsub.o fdiv.o FLOPanalyzer.o tester.o
+all : fsub.o fdiv.o research.o FLOPanalyzer.o tester.o
 
 winall : fsub.o fdiv.o FLOPanalyzer.o tester.exe
 
@@ -6,12 +6,14 @@ fsub.o : ./src/floatfuncs/fsub.c
 	gcc -c ./src/floatfuncs/fsub.c -o ./build/fsub.o -O0
 fdiv.o : ./src/floatfuncs/fdiv.c
 	gcc -c ./src/floatfuncs/fdiv.c -o ./build/fdiv.o -O0
+research.o : ./src/floatfuncs/research.c
+	gcc -c ./src/floatfuncs/research.c -o ./build/research.o -O0
 FLOPanalyzer.o : ./src/FLOPanalyzer.c
 	gcc -c ./src/FLOPanalyzer.c -o ./build/FLOPanalyzer.o -lpthread -O0
 tester.o : ./src/main.c ./src/FLOPanalyzer.c
-	gcc ./build/fdiv.o ./build/fsub.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.o -pthread -O0
+	gcc ./build/fdiv.o ./build/fsub.o ./build/research.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.o -pthread -O0
 tester.exe :  ./src/main.c ./src/FLOPanalyzer.c
-	gcc ./build/fdiv.o ./build/fsub.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.exe -pthread -O0
+	gcc ./build/fdiv.o ./build/fsub.o ./build/research.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.exe -pthread -O0
 clean:
 	rm -r ./build/FLOPanalyzer.o;\
 	rm -r ./build/executables/tester.o;\
