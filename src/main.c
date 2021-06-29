@@ -6,14 +6,17 @@
 #include<windows.h>
 SYSTEM_INFO sysinfo;
 GetSystemInfo(&sysinfo);
-#define cores sysinfo.dwNumberOfProcessors
 #else
 #define clrscr() system("clear")
 #include<unistd.h>
-#define cores sysconf(_SC_NPROCESSORS_ONLN)
 #endif
 char garbage;
 int main(int argc, char* argv[]){
+    #if _WIN32 || WIN32
+    #define cores sysinfo.dwNumberOfProcessors
+    #else
+    #define cores sysconf(_SC_NPROCESSORS_ONLN)
+    #endif
     if(argc>=2)
     {
         printf("Argument entered :%s \n",argv[1]);
@@ -64,6 +67,7 @@ int main(int argc, char* argv[]){
                 scanf("%i",&choice);
                 if(choice==1)
                 {
+                    stdflag=0;
                     t=0;
                     total_thread=0;
                     clrscr();
@@ -72,6 +76,7 @@ int main(int argc, char* argv[]){
                 }
                 else if(choice==2)
                 {
+                    stdflag=1
                     total_thread=cores;
                     t=60;
                     stdflag=1;
@@ -81,6 +86,7 @@ int main(int argc, char* argv[]){
                 }
                 else if(choice==3)
                 {
+                    stdflag=0;
                     total_thread=cores;
                     t=60;
                     clrscr();
@@ -100,6 +106,7 @@ int main(int argc, char* argv[]){
         }
         else if(strcmp(argv[1],"stdtest")==0)
         {
+            stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing varibles around.
             t=60; //extern vars, I am sick of passing varibles around.
             stdflag=1;
@@ -107,6 +114,7 @@ int main(int argc, char* argv[]){
         }
         else if(strcmp(argv[1],"research")==0)
         {
+            stdflag=0;
             t=60;
             total_thread=cores;
             research();

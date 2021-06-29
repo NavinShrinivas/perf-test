@@ -107,6 +107,11 @@ int initfloptest(){
     double fdivgflop=totalfdivpsec/1000000000;
     printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
+    if(stdflag)
+    {
+        float testresult=(fdivgflop/3)+(fsubgflop/1.5);
+
+    }
     printf("Press Enter to go back to return.");
     scanf("%c",&garbage);
     scanf("%c",&garbage);   
@@ -122,7 +127,7 @@ int research(){
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     ll tsecbuffer2;
-    for(int j=0;j<10;j++)
+    for(int j=0;j<30;j++)
     {
         if(j==0)
             tsec[j]=0;
