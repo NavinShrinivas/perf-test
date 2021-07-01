@@ -2,7 +2,7 @@
 #include<string.h>
 #include "FLOPanalyzer.h"
 #include<stdlib.h>
-#ifdef _WIN32 || WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
+#ifdef _WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
 #include<windows.h>
 SYSTEM_INFO sysinfo;
