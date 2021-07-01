@@ -109,7 +109,7 @@ int main(int argc, char* argv[]){
         {
             stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing varibles around.
-            t=10; //extern vars, I am sick of passing varibles around.
+            t=60; //extern vars, I am sick of passing varibles around.
             stdflag=1;
             initfloptest();
         }
