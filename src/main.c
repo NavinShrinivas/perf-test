@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include "FLOPanalyzer.h"
+#include<stdlib.h>
 #ifdef _WIN32 || WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
 #include<windows.h>
@@ -76,7 +77,7 @@ int main(int argc, char* argv[]){
                 }
                 else if(choice==2)
                 {
-                    stdflag=1
+                    stdflag=1;
                     total_thread=cores;
                     t=60;
                     stdflag=1;
@@ -108,7 +109,7 @@ int main(int argc, char* argv[]){
         {
             stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing varibles around.
-            t=60; //extern vars, I am sick of passing varibles around.
+            t=10; //extern vars, I am sick of passing varibles around.
             stdflag=1;
             initfloptest();
         }

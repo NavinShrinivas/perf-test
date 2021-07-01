@@ -3,9 +3,12 @@
 #include<unistd.h>
 #include<stdbool.h>
 #include<time.h>
+#include<string.h>
+#include <stdlib.h>
 #include"./floatfuncs/fsub.h"
 #include"./floatfuncs/fdiv.h"
 #include"./floatfuncs/research.h"
+#include"./SimpleDB/simpledb.h"
 
 typedef unsigned long long ll;
 
@@ -109,8 +112,30 @@ int initfloptest(){
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
     if(stdflag)
     {
-        float testresult=(fdivgflop/3)+(fsubgflop/1.5);
-
+        char data[3000];
+        char cpu[200];
+        fflush(stdin);
+        fflush(stdout);
+        printf("Enter CPU Name [ENTER MODEL NUMBER ONLY WITH NO SPACE]:");
+        scanf(" %[^\n]%*c",cpu);
+        strcat(data,cpu);
+        int testresult=(fdivgflop/3)+(fsubgflop/1.5);
+        char res[100];
+        sprintf(res, "%d",testresult);
+        strcat(data,",");
+        strcat(data,res);
+        dbwrite("host_name","username","password",data);
+        char option[3];
+        char accept[]="Y";
+        printf("Do u want to see rankings?[Y/N] : ");
+        scanf("%[^\n]%*c",option);
+        if(strcmp(option,accept)==0)
+        {
+            dbread("host_name","username","password","leaderboard.txt");
+            char cwd[1000];
+            getcwd(cwd,sizeof(cwd));
+            printf("Results flushed to %s/leaderboard.txt \n",cwd);
+        }
     }
     printf("Press Enter to go back to return.");
     scanf("%c",&garbage);
