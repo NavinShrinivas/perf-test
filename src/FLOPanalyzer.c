@@ -124,14 +124,14 @@ int initfloptest(){
         sprintf(res, "%d",testresult);
         strcat(data,",");
         strcat(data,res);
-        dbwrite("host_name","username","password",data);
+        dbwrite("http://192.168.1.51:3000/","stdtest","cs152clab",data);
         char option[3];
         char accept[]="Y";
         printf("Do u want to see rankings?[Y/N] : ");
         scanf("%[^\n]%*c",option);
         if(strcmp(option,accept)==0)
         {
-            dbread("host_name","username","password","leaderboard.txt");
+            dbread("http://192.168.1.51:3000/","stdtest","cs152clab","leaderboard.txt");
             char cwd[1000];
             getcwd(cwd,sizeof(cwd));
             printf("Results flushed to %s/leaderboard.txt \n",cwd);
