@@ -5,29 +5,40 @@
 #include<time.h>
 #include<string.h>
 #include <stdlib.h>
-#include"./floatfuncs/fsub.h"
-#include"./floatfuncs/fdiv.h"
-#include"./floatfuncs/research.h"
-#include"./SimpleDB/simpledb.h"
+#include"./floatfuncs/fsub.h" //float func for subraction with tot time counter
+#include"./floatfuncs/fdiv.h" //float func with division tot time counter
+#include"./floatfuncs/research.h" //another float func similar to fdiv and fsub but also has a per second timer
+#include"./SimpleDB/simpledb.h" //this is the libsimpldbc : a c driver for our databse called SimpleDB
 
 typedef unsigned long long ll;
 
-struct opscount{ //struct to store number of operations per thread per function
+
+struct opscount{
     ll fsubpthread;
     ll fdivpthread;
-};
-/*keeping these two as global variables as thread funtions need these parameters
-during mutithreading control is transffered from the main function hence at luck
-rendering these addresses unacessible by the function leading to seg faults*/ 
-int t;//stores the total time for testing
+}; 
+/*struct acts as final buffer for the results, before coming to this struct each thread will store 
+to an induvidual memory location using arrays*/
+
+
 ll subarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
 ll divarr[256];
-ll tsec[32];
+/*keeping these two as global variables, as thread funtions need these parameters
+during mutithreading control is transffered from the main function hence at luck
+rendering these addresses unacessible by the function leading to seg faults*/
+
+
+int t;//stores the total time for testing
+ll tsec[32]; //final location for operations per second
 int stdflag;
 int total_thread;
+/*these three varaibles are in global as they are accessed by main fucntion and used for
+ease of scripting*/
 
-int initfloptest(){
-    char* garbage;
+
+//custom and standard tests are handled by this function
+int initfloptest(){ 
+    char* garbage;//used to "presss enter to return lines"
     if(total_thread==0) //for optional menu options!
     {
         printf("Enter total number of threads : ");
@@ -38,7 +49,7 @@ int initfloptest(){
         printf("Time to run the test [Seconds] : ");
         scanf("%i",&t);
     }
-    if(t<=4 || total_thread <=1 | total_thread%2!=0)
+    if(t<=4 || total_thread <=1 | total_thread%2!=0) //checking for invalid params from user
     {
         printf("Invalid aruguments \n");
         printf("Possible errors: \n");
@@ -51,9 +62,13 @@ int initfloptest(){
     }
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     fflush(stdout);
+
+    //==========creating our array of threds==========
     struct opscount opcount[total_thread];
     pthread_t thread[total_thread];
-    //---------------------start of fsub test----------------------------------
+
+
+    //---------------------Start of fsub test----------------------------------
     for(int i=0;i<total_thread;i++)
     {
         subarr[i]=0;
@@ -82,7 +97,10 @@ int initfloptest(){
     double fsubgflop=totalfsubpsec/1000000000;
     printf("FSUB : %lf GFlops [Maximum throughput]\n",fsubgflop);
     printf("FSUB : %lf GFlops [Maximim single thread throughput]\n",maxfsubgflop);
-    //---------------------start of fdiv test----------------------------------
+    //---------------------End of fsub test---------------------
+
+
+    //---------------------Start of fdiv test---------------------
     for(int i=0;i<total_thread;i++)
     {
         divarr[i]=0;
@@ -110,6 +128,13 @@ int initfloptest(){
     double fdivgflop=totalfdivpsec/1000000000;
     printf("FDIV : %lf GFlops [Maximum throughput]\n",fdivgflop);
     printf("FDIV : %lf GFlops [Maximim single thread throughput]\n",maxfdivgflop);
+    //---------------------End of fdiv test---------------------
+
+
+    //all the stuff above "the two test" are run if the user selects a custom test
+    //the ones below is executed if user selects stdtest, hence the flag
+    //I could have made it a seperate function , but the similarities between custom and std test are 
+    //high
     if(stdflag)
     {
         char data[3000];
@@ -124,17 +149,17 @@ int initfloptest(){
         sprintf(res, "%d",testresult);
         strcat(data,",");
         strcat(data,res);
-        dbwrite("host_name","username","password",data);
+        dbwrite("http://192.168.1.51:3000/","username","password",data); //invoking from from libsimpledbc
         char option[3];
         char accept[]="Y";
         printf("Do u want to see rankings?[Y/N] : ");
         scanf("%[^\n]%*c",option);
         if(strcmp(option,accept)==0)
         {
-            dbread("host_name","username","password","leaderboard.txt");
+            dbread("http://192.168.1.51:3000/","stdtest","password","leaderboard.txt");
             char cwd[1000];
             getcwd(cwd,sizeof(cwd));
-            printf("Results flushed to %s/leaderboard.txt \n",cwd);
+            printf("Results flushed to %s/leaderboards.txt \n",cwd);
         }
     }
     printf("Press Enter to go back to return.");
@@ -144,11 +169,14 @@ int initfloptest(){
     fflush(stdin);
 }
 
+
+//this function is tailor made for research and spec sheets
 int research(){
     char* garbage;
     ll tsecbuffer[12]; 
     /*had to make this an array due to stupid behviours due to race conditions 
     and trying to achive eventual consistency.*/
+
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     ll tsecbuffer2;
