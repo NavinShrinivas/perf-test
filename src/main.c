@@ -5,15 +5,15 @@
 #ifdef _WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
 #include<windows.h>
-SYSTEM_INFO sysinfo;
-GetSystemInfo(&sysinfo);
 #else
 #define clrscr() system("clear")
 #include<unistd.h>
 #endif
 char garbage;
 int main(int argc, char* argv[]){
-    #if _WIN32 || WIN32
+    #if _WIN32
+    SYSTEM_INFO sysinfo;
+    GetSystemInfo(&sysinfo);
     #define cores sysinfo.dwNumberOfProcessors
     #else
     #define cores sysconf(_SC_NPROCESSORS_ONLN)
