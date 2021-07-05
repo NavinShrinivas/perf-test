@@ -5,7 +5,7 @@ winall : simpledbwin fsub.o fdiv.o research.o FLOPanalyzer.o tester.exe
 simpledb.o : ./src/SimpleDB/simpledb.c
 	gcc -c ./src/SimpleDB/simpledb.c -o ./build/simpledb.o -lcurl
 simpledbwin : ./src/SimpleDB/simpledb.c
-	gcc -c ./src/SimpleDB/simpledb.c -o ./build/simpledb.o -lcurl -I "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\include"
+	gcc -c ./src/SimpleDB/simpledb.c -o ./build/simpledb.o -lcurl
 fsub.o : ./src/floatfuncs/fsub.c
 	gcc -c ./src/floatfuncs/fsub.c -o ./build/fsub.o -O0
 fdiv.o : ./src/floatfuncs/fdiv.c
@@ -25,11 +25,13 @@ clean:
 	rm -r ./build/executables/tester.exe;\
 	tm -r ./build/fdiv.o
 winclean :
-	del /f ./build/FLOPanalyzer.o;
-	del /f ./build/executables/tester.o;
-	del /f ./build/executables/tester.exe;
-	del /f ./build/fsub.o;
-	del /f ./build/fdiv.o
+	del /f build\FLOPanalyzer.o;
+	del /f build\executables\tester.o;
+	del /f build\executables\tester.exe;
+	del /f build\fsub.o;
+	del /f build\fdiv.o;
+	del /f build\research.o;
+	del /f build\simpledb.o
 floptest :
 	gcc FLOPanalyzer.c -o floptest.o -pthread
 	echo "ouput file : floptest.o"

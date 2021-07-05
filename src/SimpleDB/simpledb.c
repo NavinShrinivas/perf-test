@@ -1,6 +1,10 @@
 #include<stdio.h>
 #include<string.h>
+#if _WIN32
+#include"curl.h"
+#else
 #include<curl/curl.h>
+#endif
 #include<ctype.h>
 
 void dbread(char* host , char* username, char* password , char* file)
