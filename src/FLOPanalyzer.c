@@ -63,25 +63,32 @@ int initfloptest(){
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     fflush(stdout);
 
-    //==========creating our array of threds==========
+    //==========creating our array of threads==========
     struct opscount opcount[total_thread];
     pthread_t thread[total_thread];
 
 
     //---------------------Start of fsub test----------------------------------
+
+    /*Using of multiple buffers and array of locations the working threads write to is cus of race
+    conditions , one it felt neats this way , and of there was somesort of caching or atomic system
+    making all the threads add on rapidly to a single memory location will ofc lead to counting problem
+    hence eventually consistency was achived using array of threads*/
+
     for(int i=0;i<total_thread;i++)
     {
         subarr[i]=0;
-        pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); //creates the thread
+        pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); 
+        //creates the thread NOTE : the thread fn has a timer inbuit hence control need not be tranfered
     }
     int optime=t/4;//time per function
     for(int i=0;i<total_thread;i++)
 	{
-		pthread_join(thread[i],NULL);// waits for the thread fo finish , finish condition being NULL
+		pthread_join(thread[i],NULL);// waits for the thread to finish , finish condition being NULL
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].fsubpthread=subarr[i];//transffers values from temp array to struct
+        opcount[i].fsubpthread=subarr[i];//transferes values from temp array to struct
     }
     ll totalfsub=0;
     ll maxfsub=0;
@@ -101,14 +108,21 @@ int initfloptest(){
 
 
     //---------------------Start of fdiv test---------------------
+
+    /*Using of multiple buffers and array of locations the working threads write to is cus of race
+    conditions , one it felt neats this way , and of there was somesort of caching or atomic system
+    making all the threads add on rapidly to a single memory location will ofc lead to counting problem
+    hence eventually consistency was achived using array of threads*/
+
     for(int i=0;i<total_thread;i++)
     {
         divarr[i]=0;
-        pthread_create(&thread[i],NULL,fdivtf,&divarr[i]); //creates the thread
+        pthread_create(&thread[i],NULL,fdivtf,&divarr[i]);
+        //creates the thread | NOTE : the thread fn has a timer inbuit hence control need not be tranfered
     }
     for(int i=0;i<total_thread;i++)
 	{
-		pthread_join(thread[i],NULL);// waits for the thread fo finish , finish condition being NULL
+		pthread_join(thread[i],NULL);// waits for the thread to finish , finish condition being NULL
 	}
     for(int i=0;i<total_thread;i++)
 	{
@@ -135,7 +149,9 @@ int initfloptest(){
     //the ones below is executed if user selects stdtest, hence the flag
     //I could have made it a seperate function , but the similarities between custom and std test are 
     //high
-    if(stdflag)
+    /*this flag mainly sets the time and number of cores , and takes care of uploading results to 
+    database and also retrive data and display them*/
+    if(stdflag)  
     {
         char data[3000];
         char cpu[200];
@@ -192,6 +208,7 @@ int research(){
         {
             tsecbuffer[i]=0;
             pthread_create(&thread[i],NULL,researchtf,&tsecbuffer[i]); //creates the thread
+            //this threadfn has a 1 second timer
         }
         for(int i=0;i<total_thread;i++)
 	    {

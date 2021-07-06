@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #if _WIN32
-#include"curl.h"
+#include"curl\curl.h"
 #else
 #include<curl/curl.h>
 #endif
