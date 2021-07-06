@@ -1,0 +1,23 @@
+{
+    "cSpell.words": [
+        "dbwrite",
+        "fdiv",
+        "fdivgflop",
+        "fdivpthread",
+        "fdivtf",
+        "fsub",
+        "fsubgflop",
+        "fsubtf",
+        "maxfdiv",
+        "maxfdivgflop",
+        "maxfdivpsec",
+        "maxfsub",
+        "maxfsubgflop",
+        "opcount",
+        "researchtf",
+        "threadfn",
+        "totalfdiv",
+        "totalfdivpsec",
+        "totalfsub"
+    ]
+}

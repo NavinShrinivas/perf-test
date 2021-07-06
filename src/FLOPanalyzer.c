@@ -18,21 +18,21 @@ struct opscount{
     ll fdivpthread;
 }; 
 /*struct acts as final buffer for the results, before coming to this struct each thread will store 
-to an induvidual memory location using arrays*/
+to an individual memory location using arrays*/
 
 
-ll subarr[256];//a temp array to stroe values in the thread function , assumin max threads 256
+ll subarr[256];//a temp array to store values in the thread function , assuming max threads 256
 ll divarr[256];
 /*keeping these two as global variables, as thread funtions need these parameters
 during mutithreading control is transffered from the main function hence at luck
-rendering these addresses unacessible by the function leading to seg faults*/
+rendering these addresses unaccessible by the function leading to seg faults*/
 
 
 int t;//stores the total time for testing
 ll tsec[32]; //final location for operations per second
 int stdflag;
 int total_thread;
-/*these three varaibles are in global as they are accessed by main fucntion and used for
+/*these three variables are in global as they are accessed by main function and used for
 ease of scripting*/
 
 
@@ -51,10 +51,10 @@ int initfloptest(){
     }
     if(t<=4 || total_thread <=1 | total_thread%2!=0) //checking for invalid params from user
     {
-        printf("Invalid aruguments \n");
+        printf("Invalid arguments \n");
         printf("Possible errors: \n");
         printf("[time] < 4 \n");
-        printf("[threads] < 2 OR thrads not in multiples of 2 \n");
+        printf("[threads] < 2 OR threads not in multiples of 2 \n");
         printf("Press Enter to go back to return.");
         scanf("%c",&garbage);
         scanf("%c",&garbage);   
@@ -73,13 +73,13 @@ int initfloptest(){
     /*Using of multiple buffers and array of locations the working threads write to is cus of race
     conditions , one it felt neats this way , and of there was somesort of caching or atomic system
     making all the threads add on rapidly to a single memory location will ofc lead to counting problem
-    hence eventually consistency was achived using array of threads*/
+    hence eventually consistency was achieved using array of threads*/
 
     for(int i=0;i<total_thread;i++)
     {
         subarr[i]=0;
         pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); 
-        //creates the thread NOTE : the thread fn has a timer inbuit hence control need not be tranfered
+        //creates the thread NOTE : the thread fn has a timer inbuilt hence control need not be transferred
     }
     int optime=t/4;//time per function
     for(int i=0;i<total_thread;i++)
@@ -88,7 +88,7 @@ int initfloptest(){
 	}
     for(int i=0;i<total_thread;i++)
 	{
-        opcount[i].fsubpthread=subarr[i];//transferes values from temp array to struct
+        opcount[i].fsubpthread=subarr[i];//transfers values from temp array to struct
     }
     ll totalfsub=0;
     ll maxfsub=0;
@@ -112,13 +112,13 @@ int initfloptest(){
     /*Using of multiple buffers and array of locations the working threads write to is cus of race
     conditions , one it felt neats this way , and of there was somesort of caching or atomic system
     making all the threads add on rapidly to a single memory location will ofc lead to counting problem
-    hence eventually consistency was achived using array of threads*/
+    hence eventually consistency was achieved using array of threads*/
 
     for(int i=0;i<total_thread;i++)
     {
         divarr[i]=0;
         pthread_create(&thread[i],NULL,fdivtf,&divarr[i]);
-        //creates the thread | NOTE : the thread fn has a timer inbuit hence control need not be tranfered
+        //creates the thread | NOTE : the thread fn has a timer inbuilt hence control need not be transferred
     }
     for(int i=0;i<total_thread;i++)
 	{
@@ -147,7 +147,7 @@ int initfloptest(){
 
     //all the stuff above "the two test" are run if the user selects a custom test
     //the ones below is executed if user selects stdtest, hence the flag
-    //I could have made it a seperate function , but the similarities between custom and std test are 
+    //I could have made it a separate function , but the similarities between custom and std test are 
     //high
     /*this flag mainly sets the time and number of cores , and takes care of uploading results to 
     database and also retrive data and display them*/
@@ -190,8 +190,8 @@ int initfloptest(){
 int research(){
     char* garbage;
     ll tsecbuffer[12]; 
-    /*had to make this an array due to stupid behviours due to race conditions 
-    and trying to achive eventual consistency.*/
+    /*had to make this an array due to stupid behaviour due to race conditions 
+    and trying to achieve eventual consistency.*/
 
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
