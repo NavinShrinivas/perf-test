@@ -58,7 +58,7 @@ void dbread(char* host , char* username, char* password , char* file)
         char a[100000];
         FILE* f1=fopen("new.txt","r");
         char data[1000];
-        fscanf(f1,"%[^NULL]%*c",data);
+        fscanf(f1,"%[^EOF]%*c",data);
         char* split=data;
         char* token1=strtok_r(split,"\n",&split);
         while(token1!=NULL)
@@ -69,14 +69,14 @@ void dbread(char* host , char* username, char* password , char* file)
             }
             token1=strtok_r(split,"\n",&split);
         }
-        fclose(f1);remove("new.txt");
+        fclose(f1);
     }
     else{
         char a[100000];
         FILE* f1=fopen("new.txt","r");
         FILE* f2=fopen(file,"w+");
         char data[1000];
-        fscanf(f1,"%[^NULL]%*c",data);
+        fscanf(f1,"%[^EOF]%*c",data);
         char* split=data;
         char* token1=strtok_r(split,"\n",&split);
         while(token1!=NULL)
@@ -88,9 +88,9 @@ void dbread(char* host , char* username, char* password , char* file)
             }
             token1=strtok_r(split,"\n",&split);
         }
-        fclose(f2);fclose(f1);remove("new.txt");
+        fclose(f2);fclose(f1);
     }
-    curl_easy_cleanup(curl);
+    curl_easy_cleanup(curl);remove("new.txt");
 }
 
 void dbwrite(char* host , char* username, char* password , char* data)

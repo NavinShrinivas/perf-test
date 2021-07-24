@@ -76,8 +76,8 @@ int main(int argc, char* argv[]){
                 printf("\t Usage : ./tester.o floptest [Number of threads] [time in seconds]\n");
             }
             else{
-                total_thread=atoi(argv[2]); //extern vars, I am sick of passing varibles around.
-                t=atoi(argv[3]); //extern vars, I am sick of passing varibles around.
+                total_thread=atoi(argv[2]); //extern vars, I am sick of passing variables around.
+                t=atoi(argv[3]); //extern vars, I am sick of passing variables around.
                 initfloptest();
             }
         }
@@ -127,7 +127,7 @@ int main(int argc, char* argv[]){
                     return 0;
                 else
                 {
-                    printf("Plese enter a correct option.Press enter to continue!");
+                    printf("Please enter a correct option.Press enter to continue!");
                     fflush(stdout);
                     fflush(stdin);  
                     scanf("%c",&garbage);
@@ -137,8 +137,8 @@ int main(int argc, char* argv[]){
         else if(strcmp(argv[1],"stdtest")==0)
         {
             stdflag=1;
-            total_thread=cores; //extern vars, I am sick of passing varibles around.
-            t=60; //extern vars, I am sick of passing varibles around.
+            total_thread=cores; //extern vars, I am sick of passing variables around.
+            t=10; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }
