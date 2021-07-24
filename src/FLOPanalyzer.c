@@ -165,14 +165,20 @@ int initfloptest(){
         sprintf(res, "%d",testresult);
         strcat(data,",");
         strcat(data,res);
-        dbwrite("http://192.168.1.51:3000/","username","password",data); //invoking from from libsimpledbc
-        char option[3];
         char accept[]="Y";
-        printf("Do u want to see rankings?[Y/N] : ");
-        scanf("%[^\n]%*c",option);
-        if(strcmp(option,accept)==0)
+        char option1[3];
+        printf("Do you want to upload these results to the web?[Y/N] : ");
+        scanf("%[^\n]%*c",option1);
+        if(strcmp(option1,accept)==0)
         {
-            dbread("http://192.168.1.51:3000/","stdtest","password","leaderboard.txt");
+            dbwrite("http://navin.works:8080/","stdtest","*********",data); //invoking from from libsimpledbc
+        }
+        char option2[3];
+        printf("Do you want to see rankings?[Y/N] : ");
+        scanf("%[^\n]%*c",option2);
+        if(strcmp(option2,accept)==0)
+        {
+            dbread("http://navin.works:8080/","stdtest","*********","leaderboard.txt");
             char cwd[1000];
             getcwd(cwd,sizeof(cwd));
             printf("Results flushed to %s/leaderboards.txt \n",cwd);

@@ -53,23 +53,43 @@ void dbread(char* host , char* username, char* password , char* file)
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, f);
     res = curl_easy_perform(curl);
     fclose(f);
-    char a[100000];
-    FILE* f1=fopen("new.txt","r");
-    FILE* f2=fopen(file,"w+");
-    char data[1000];
-    fscanf(f1,"%[^NULL]%*c",data);
-    char* split=data;
-    char* token1=strtok_r(split,"\n",&split);
-    while(token1!=NULL)
+    if(strcmp(file,"STDOUT")==0)
     {
-        if(strcmp(token1,"<pre>")!=0 && strcmp(token1,"</pre>")!=0)
+        char a[100000];
+        FILE* f1=fopen("new.txt","r");
+        char data[1000];
+        fscanf(f1,"%[^NULL]%*c",data);
+        char* split=data;
+        char* token1=strtok_r(split,"\n",&split);
+        while(token1!=NULL)
         {
-        fprintf(f2,"%s",token1);
-        fprintf(f2,"%s","\n");
+            if(strcmp(token1,"<pre>")!=0 && strcmp(token1,"</pre>")!=0)
+            {
+                printf("%s\n",token1);
+            }
+            token1=strtok_r(split,"\n",&split);
         }
-        token1=strtok_r(split,"\n",&split);
+        fclose(f1);remove("new.txt");
     }
-    fclose(f2);fclose(f1);remove("new.txt");
+    else{
+        char a[100000];
+        FILE* f1=fopen("new.txt","r");
+        FILE* f2=fopen(file,"w+");
+        char data[1000];
+        fscanf(f1,"%[^NULL]%*c",data);
+        char* split=data;
+        char* token1=strtok_r(split,"\n",&split);
+        while(token1!=NULL)
+        {
+            if(strcmp(token1,"<pre>")!=0 && strcmp(token1,"</pre>")!=0)
+            {
+                fprintf(f2,"%s",token1);
+                fprintf(f2,"%s","\n");
+            }
+            token1=strtok_r(split,"\n",&split);
+        }
+        fclose(f2);fclose(f1);remove("new.txt");
+    }
     curl_easy_cleanup(curl);
 }
 
@@ -95,7 +115,6 @@ void dbwrite(char* host , char* username, char* password , char* data)
     strcat(link,password);
     strcat(link,"/");
     strcat(link,data);
-    // printf("%s",link);
     curl_easy_setopt(curl,CURLOPT_URL,link);
     curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
     printf("Test data successfully written to database!\n");
