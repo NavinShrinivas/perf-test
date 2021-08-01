@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/Repos/perf-test/CMakeFiles /home/navin/Repos/perf-test//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /home/navin/Repos/perf-test && $(CMAKE_COMMAND) -E cmake_progress_start /home/navin/Repos/perf-test/CMakeFiles /home/navin/Repos/perf-test/compiled//CMakeFiles/progress.marks
+	cd /home/navin/Repos/perf-test && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compiled/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/navin/Repos/perf-test/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/navin/Repos/perf-test && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compiled/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,61 +103,18 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/navin/Repos/perf-test && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compiled/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/navin/Repos/perf-test && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 compiled/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/navin/Repos/perf-test && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-#=============================================================================
-# Target rules for targets named tester
-
-# Build rule for target.
-tester: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tester
-.PHONY : tester
-
-# fast build rule for target.
-tester/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/build
-.PHONY : tester/fast
-
-# target to build an object file
-src/FLOPanalyzer.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/FLOPanalyzer.o
-.PHONY : src/FLOPanalyzer.o
-
-# target to preprocess a source file
-src/FLOPanalyzer.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/FLOPanalyzer.i
-.PHONY : src/FLOPanalyzer.i
-
-# target to generate assembly for a file
-src/FLOPanalyzer.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/FLOPanalyzer.s
-.PHONY : src/FLOPanalyzer.s
-
-# target to build an object file
-src/main.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/main.o
-.PHONY : src/main.o
-
-# target to preprocess a source file
-src/main.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/main.i
-.PHONY : src/main.i
-
-# target to generate assembly for a file
-src/main.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tester.dir/build.make CMakeFiles/tester.dir/src/main.s
-.PHONY : src/main.s
 
 # Help Target
 help:
@@ -167,13 +124,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... tester"
-	@echo "... src/FLOPanalyzer.o"
-	@echo "... src/FLOPanalyzer.i"
-	@echo "... src/FLOPanalyzer.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 .PHONY : help
 
 
@@ -185,6 +135,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/navin/Repos/perf-test && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

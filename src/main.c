@@ -59,14 +59,14 @@ int main(int argc, char* argv[]){
             printf("   option_name : floptest \n");
             printf("   Arg1 : Total number of threads\n");
             printf("   Arg2 : Total time for testing\n");
-            printf("2.menu\n");
-            printf("   option_name : menu \n");
-            printf("   Arguments : NO ARGUMENTS\n");
-            printf("3.stdtest\n");
+            printf("2.stdtest\n");
             printf("   option_name : stdtest \n");
             printf("   Arguments : NO ARGUMENTS\n");
-            printf("4.research\n");
+            printf("3.research\n");
             printf("   option_name : research \n");
+            printf("   Arguments : NO ARGUMENTS\n");
+            printf("4.menu\n");
+            printf("   option_name : menu \n");
             printf("   Arguments : NO ARGUMENTS\n");
         }
         else if(strcmp(argv[1],"floptest")==0)
@@ -80,6 +80,21 @@ int main(int argc, char* argv[]){
                 t=atoi(argv[3]); //extern vars, I am sick of passing variables around.
                 initfloptest();
             }
+        }
+        else if(strcmp(argv[1],"stdtest")==0)
+        {
+            stdflag=1;
+            total_thread=cores; //extern vars, I am sick of passing variables around.
+            t=60; //extern vars, I am sick of passing variables around.
+            stdflag=1;
+            initfloptest();
+        }
+        else if(strcmp(argv[1],"research")==0)
+        {
+            stdflag=0;
+            t=60;
+            total_thread=cores;
+            research();
         }
         else if(strcmp(argv[1],"menu")==0) //optional menu driven program!
         {
@@ -133,21 +148,6 @@ int main(int argc, char* argv[]){
                     scanf("%c",&garbage);
                 }
             }
-        }
-        else if(strcmp(argv[1],"stdtest")==0)
-        {
-            stdflag=1;
-            total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=10; //extern vars, I am sick of passing variables around.
-            stdflag=1;
-            initfloptest();
-        }
-        else if(strcmp(argv[1],"research")==0)
-        {
-            stdflag=0;
-            t=60;
-            total_thread=cores;
-            research();
         }
         else{
             printf("Please enter a valid argument!\n");
