@@ -44,34 +44,6 @@
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
   ```./tester.o menu```
 
-## project file structure 
-  ```
- .
-├── build
-│   └── executables
-│       └──placeholder.txt
-├── files
-│   ├── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS-converted.pdf
-│   └── PSWCL_MINIPROJECT_PHASE-I_SYNOPSIS.docx
-├── LICENSE
-├── Makefile
-├── README.md
-├── result.txt
-└── src
-    ├── database.c
-    ├── database.h
-    ├── floatfuncs
-    │   ├── fdiv.c
-    │   ├── fdiv.h
-    │   ├── fsub.c
-    │   ├── fsub.h
-    │   ├── research.c
-    │   └── research.h
-    ├── FLOPanalyzer.c
-    ├── FLOPanalyzer.h
-    └── main.c
-  ```
-
 ## Some problems we ran into during this project :
 * Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.
 *  Race conditions , due to multiples IO's on a single memory due to multi threading and rapid while loops we ran into the ever infamous race condition problem.Of course our workaround was eventually consistency by using various buffers and adding them up in the end.
