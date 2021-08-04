@@ -195,7 +195,7 @@ int initfloptest(){
         strcat(data,res);
         char accept[]="Y";
         char option1[3];
-        printf("%s\n",data);
+        printf("Results : %s\n",data);
         printf("Do you want to upload these results to the web?[Y/N] : ");
         scanf("%[^\n]%*c",option1);
         if(strcmp(option1,accept)==0)

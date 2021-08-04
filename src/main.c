@@ -98,8 +98,8 @@ int main(int argc, char* argv[]){
                 if(choice==1)
                 {
                     stdflag=0;
-                    t=0;
-                    total_thread=0;
+                    // t=0;
+                    // total_thread=0;
                     clrscr();
                     initfloptest();
                     clrscr();
@@ -138,7 +138,7 @@ int main(int argc, char* argv[]){
         {
             stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=10; //extern vars, I am sick of passing variables around.
+            t=60; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }
@@ -150,16 +150,16 @@ int main(int argc, char* argv[]){
             research();
         }
         else{
-            printf("Please enter a valid argument!\n");
-            printf("append help to execution command to see all possible arguments.\n");
+            printf("Please enter a valid argument!\n\n");
+            printf("Do: \n\t./tester.o help\nTo see all possible modules and arguments");
             return 0;
         }
         
     }
     else
     {
-        printf("Please enter a argument!\n");
-        printf("append help to execution command to see all possible arguments.\n");
+        printf("Please enter a argument!\n\n");
+        printf("Do: \n\t./tester.o help\nTo see all possible modules and arguments.\n");
         return 0;
     } 
 }
