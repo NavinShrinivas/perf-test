@@ -44,7 +44,9 @@
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with <br>
   ```./tester.o menu```
 
-## Some intresting problems we ran into during this project :
-* Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.
+## Intresting problems encountered during this project :
+and how we solved em :
+*  Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.We figured it out mainly by asking people in stack overflows
+and seeing other multithreaded application.
 *  Race conditions , due to multiples IO's on a single memory due to multi threading and rapid while loops we ran into the ever infamous race condition problem.Of course our workaround was eventually consistency by using various buffers and adding them up in the end.
 
