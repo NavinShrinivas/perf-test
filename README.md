@@ -41,7 +41,7 @@
  ./tester.exe help
  ```
 ## Acess style:
-  the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
+  the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with <br>
   ```./tester.o menu```
 
 ## Some intresting problems we ran into during this project :
