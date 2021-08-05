@@ -39,10 +39,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "compiled/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/tester.dir/DependInfo.cmake"
+  "CMakeFiles/perftest.dir/DependInfo.cmake"
+  "CMakeFiles/SimpleDB.dir/DependInfo.cmake"
+  "CMakeFiles/floatfuncs.dir/DependInfo.cmake"
   )

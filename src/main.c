@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include<stdio.h>
 #include<string.h>
-#include "FLOPanalyzer.h"
+#include "./floatfuncs/FLOPanalyzer.h"
 #include<stdlib.h>
 #ifdef _WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
