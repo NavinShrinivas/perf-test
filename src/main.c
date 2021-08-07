@@ -28,18 +28,24 @@ SOFTWARE.
 **********************************************************************************/
 
 #include<stdio.h>
-#include<string.h>
-#include "./floatfuncs/FLOPanalyzer.h"
 #include<stdlib.h>
-#ifdef _WIN32 //trying porable clrscr() and NPROESSORS_ONLN macro
+#include<string.h>
+
+#ifdef _WIN32 //trying portable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
 #include<windows.h>
 #else
 #define clrscr() system("clear")
 #include<unistd.h>
 #endif
+
+#include "./floatfuncs/FLOPanalyzer.h"
+
+
 char garbage;
+
 int main(int argc, char* argv[]){
+    //---------------------------------------------
     #if _WIN32
     SYSTEM_INFO sysinfo;
     GetSystemInfo(&sysinfo);
@@ -47,11 +53,10 @@ int main(int argc, char* argv[]){
     #else
     #define cores sysconf(_SC_NPROCESSORS_ONLN)
     #endif
-    if(argc>=2)
-    {
+    //---------------------------------------------
+    if(argc >= 2){
         printf("Argument entered :%s \n",argv[1]);
-        if(strcmp(argv[1],"help")==0)
-        {
+        if(strcmp(argv[1],"help") == 0){
             printf("Usage : ./tester.o [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
             printf("List of available options:\n");
             printf("1.floptest\n");
@@ -69,23 +74,18 @@ int main(int argc, char* argv[]){
             printf("   option_name : research \n");
             printf("   Arguments : NO ARGUMENTS\n");
         }
-        else if(strcmp(argv[1],"floptest")==0)
-        {
-            if(argc<4)
-            {
+        else if(strcmp(argv[1],"floptest") == 0){
+            if(argc < 4)
                 printf("\t Usage : ./tester.o floptest [Number of threads] [time in seconds]\n");
-            }
             else{
                 total_thread=atoi(argv[2]); //extern vars, I am sick of passing variables around.
                 t=atoi(argv[3]); //extern vars, I am sick of passing variables around.
                 initfloptest();
             }
         }
-        else if(strcmp(argv[1],"menu")==0) //optional menu driven program!
-        {
+        else if(strcmp(argv[1],"menu") == 0){ 
             int choice;
-            while(1)
-            {
+            while(1){
                 clrscr();
                 //menu
                 printf("---------------HARDWARE TESTER---------------\n");
@@ -95,8 +95,7 @@ int main(int argc, char* argv[]){
                 printf("4.Exit\n");
                 printf("Enter your choice :");
                 scanf("%i",&choice);
-                if(choice==1)
-                {
+                if(choice == 1){
                     stdflag=0;
                     // t=0;
                     // total_thread=0;
@@ -104,8 +103,7 @@ int main(int argc, char* argv[]){
                     initfloptest();
                     clrscr();
                 }
-                else if(choice==2)
-                {
+                else if(choice == 2){
                     stdflag=1;
                     total_thread=cores;
                     t=60;
@@ -114,8 +112,7 @@ int main(int argc, char* argv[]){
                     initfloptest();
                     clrscr();
                 }
-                else if(choice==3)
-                {
+                else if(choice == 3){
                     stdflag=0;
                     total_thread=cores;
                     t=60;
@@ -123,10 +120,9 @@ int main(int argc, char* argv[]){
                     research();
                     clrscr();
                 }
-                else if(choice==4)
+                else if(choice == 4)
                     return 0;
-                else
-                {
+                else{
                     printf("Please enter a correct option.Press enter to continue!");
                     fflush(stdout);
                     fflush(stdin);  
@@ -134,16 +130,14 @@ int main(int argc, char* argv[]){
                 }
             }
         }
-        else if(strcmp(argv[1],"stdtest")==0)
-        {
+        else if(strcmp(argv[1],"stdtest") == 0){
             stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing variables around.
             t=60; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }
-        else if(strcmp(argv[1],"research")==0)
-        {
+        else if(strcmp(argv[1],"research") == 0){
             stdflag=0;
             t=60;
             total_thread=cores;
@@ -156,8 +150,7 @@ int main(int argc, char* argv[]){
         }
         
     }
-    else
-    {
+    else{
         printf("Please enter a argument!\n\n");
         printf("Do: \n\t./tester.o help\nTo see all possible modules and arguments.\n");
         return 0;

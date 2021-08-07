@@ -32,7 +32,8 @@ SOFTWARE.
 #include<stdbool.h>
 #include<time.h>
 #include<string.h>
-#include <stdlib.h>
+#include<stdlib.h>
+
 #include"./fsub.h" //float func for subraction with tot time counter
 #include"./fdiv.h" //float func with division tot time counter
 #include"./research.h" //another float func similar to fdiv and fsub but also has a per second timer
@@ -67,18 +68,15 @@ ease of scripting*/
 //custom and standard tests are handled by this function
 int initfloptest(){ 
     char* garbage;//used to "presss enter to return lines"
-    if(total_thread==0) //for optional menu options!
-    {
+    if(total_thread==0){    //for optional menu options!
         printf("Enter total number of threads : ");
         scanf("%i",&total_thread);
     }
-    if(t==0) //optional menu options!
-    {
+    if(t==0){   //optional menu options!
         printf("Time to run the test [Seconds] : ");
         scanf("%i",&t);
     }
-    if(t<=4 || total_thread <=1 | total_thread%2!=0) //checking for invalid params from user
-    {
+    if(t<=4 || total_thread <=1 | total_thread%2!=0){   //checking for invalid params from user
         printf("Invalid arguments \n");
         printf("Possible errors: \n");
         printf("[time] < 4 \n");
@@ -103,25 +101,22 @@ int initfloptest(){
     making all the threads add on rapidly to a single memory location will ofc lead to counting problem
     hence eventually consistency was achieved using array of threads*/
 
-    for(int i=0;i<total_thread;i++)
-    {
+    for(int i=0;i<total_thread;i++){
         subarr[i]=0;
         pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); 
         //creates the thread NOTE : the thread fn has a timer inbuilt hence control need not be transferred
     }
     int optime=t/4;//time per function
+
     for(int i=0;i<total_thread;i++)
-	{
 		pthread_join(thread[i],NULL);// waits for the thread to finish , finish condition being NULL
-	}
+
     for(int i=0;i<total_thread;i++)
-	{
         opcount[i].fsubpthread=subarr[i];//transfers values from temp array to struct
-    }
+
     ll totalfsub=0;
     ll maxfsub=0;
-    for(int i=0;i<total_thread;i++)
-    {
+    for(int i=0;i<total_thread;i++){
         if(maxfsub<opcount[i].fsubpthread)
             maxfsub=opcount[i].fsubpthread;
         totalfsub+=opcount[i].fsubpthread;
@@ -142,24 +137,20 @@ int initfloptest(){
     making all the threads add on rapidly to a single memory location will ofc lead to counting problem
     hence eventually consistency was achieved using array of threads*/
 
-    for(int i=0;i<total_thread;i++)
-    {
+    for(int i=0;i<total_thread;i++){
         divarr[i]=0;
         pthread_create(&thread[i],NULL,fdivtf,&divarr[i]);
         //creates the thread | NOTE : the thread fn has a timer inbuilt hence control need not be transferred
     }
     for(int i=0;i<total_thread;i++)
-	{
 		pthread_join(thread[i],NULL);// waits for the thread to finish , finish condition being NULL
-	}
+
     for(int i=0;i<total_thread;i++)
-	{
         opcount[i].fdivpthread=divarr[i];//transfers values from temp array to struct
-    }
+
     ll totalfdiv=0;
     ll maxfdiv=0;
-    for(int i=0;i<total_thread;i++)
-    {
+    for(int i=0;i<total_thread;i++){
         if(maxfdiv<opcount[i].fdivpthread)
             maxfdiv=opcount[i].fdivpthread;
         totalfdiv+=opcount[i].fdivpthread;
@@ -179,8 +170,7 @@ int initfloptest(){
     //high
     /*this flag mainly sets the time and number of cores , and takes care of uploading results to 
     database and also retrive data and display them*/
-    if(stdflag)  
-    {
+    if(stdflag)  {
         char data[3000];
         char cpu[200];
         fflush(stdin);
@@ -199,14 +189,12 @@ int initfloptest(){
         printf("Do you want to upload these results to the web?[Y/N] : ");
         scanf("%[^\n]%*c",option1);
         if(strcmp(option1,accept)==0)
-        {
             dbwrite("http://navin.works:8080/","stdtest","*****",data); //invoking from from libsimpledbc
-        }
+
         char option2[3];
         printf("Do you want to see rankings?[Y/N] : ");
         scanf("%[^\n]%*c",option2);
-        if(strcmp(option2,accept)==0)
-        {
+        if(strcmp(option2,accept)==0){
             dbread("http://navin.works:8080/","stdtest","*****","STDOUT");
             dbread("http://navin.works:8080/","stdtest","*****","leaderboard.txt");
             char cwd[1000];
@@ -231,27 +219,23 @@ int research(){
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     ll tsecbuffer2;
-    for(int j=0;j<30;j++)
-    {
+    for(int j=0;j<30;j++){
         if(j==0)
             tsec[j]=0;
         else{
-        int temp = tsecbuffer2/1000000000;
-        tsec[j]=temp;
+            int temp = tsecbuffer2/1000000000;
+            tsec[j]=temp;
         }
-        for(int i=0;i<total_thread;i++)
-        {
+        for(int i=0;i<total_thread;i++){
             tsecbuffer[i]=0;
             pthread_create(&thread[i],NULL,researchtf,&tsecbuffer[i]); //creates the thread
             //this threadfn has a 1 second timer
         }
         for(int i=0;i<total_thread;i++)
-	    {
 		    pthread_join(thread[i],NULL);// waits for the thread fo finish , finish condition being NULL
-	    }
+    
         tsecbuffer2=0;
-        for(int i=0;i<12;i++)
-        {
+        for(int i=0;i<12;i++){
             tsecbuffer2+=tsecbuffer[i];
             tsecbuffer[i]=0;
         }
@@ -263,9 +247,8 @@ int research(){
     fflush(stdout);
     fflush(stdin);
     for(int i=0;i<30;i++)
-    {
         fprintf(f,"%d %lli\n",i*2,tsec[i]);
-    }
+
     fclose(f);
     sleep(3);
     char cwd[1000];
@@ -278,6 +261,5 @@ int research(){
     scanf("%c",&garbage);
     fflush(stdout);
     fflush(stdin);
-
 }
 
