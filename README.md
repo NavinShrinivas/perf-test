@@ -1,9 +1,11 @@
 > :warning: **All the code present in this repository must be run preferably on a virtual machine as there is a possibility the code can harm the machine!Any how a force reboot should fix it.**
+
+<b><p>Note : This project is also a part of UE20CS152 course</p></b>
 # Perf-test
 
-<p>This project got its life as part of UE20CS152 course</p>
 
-# Project Contributors:
+
+## Project Contributors:
 
 * [Rahul Samal](https://github.com/*add_your_link_here*)
 * [P K Navin Shrinivas ](https://github.com/NavinShrinivas)
@@ -27,7 +29,9 @@ To build this project , you CMake , as of yet this may seem like over engineerin
   ```
   git clone https://github.com/NavinShrinivas/perf-test
   cd perf-test/src
-  make winall
+  
+  make -f manualmake.mk 
+  
   cd .. && cd build/executables
   tester.exe
   ```
@@ -39,7 +43,9 @@ To build this project , you CMake , as of yet this may seem like over engineerin
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
   ```./perftool menu```
 
-## Some problems we ran into during this project :
-* Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.
+## Intresting problems encountered during this project :
+and how we solved em :
+*  Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.We figured it out mainly by asking people in stack overflows
+and seeing other multithreaded application.
 *  Race conditions , due to multiples IO's on a single memory due to multi threading and rapid while loops we ran into the ever infamous race condition problem.Of course our workaround was eventually consistency by using various buffers and adding them up in the end.
 
