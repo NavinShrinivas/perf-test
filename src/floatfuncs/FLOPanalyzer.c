@@ -33,10 +33,10 @@ SOFTWARE.
 #include<time.h>
 #include<string.h>
 #include <stdlib.h>
-#include"./floatfuncs/fsub.h" //float func for subraction with tot time counter
-#include"./floatfuncs/fdiv.h" //float func with division tot time counter
-#include"./floatfuncs/research.h" //another float func similar to fdiv and fsub but also has a per second timer
-#include"./SimpleDB/simpledb.h" //this is the libsimpldbc : a c driver for our databse called SimpleDB
+#include"./fsub.h" //float func for subraction with tot time counter
+#include"./fdiv.h" //float func with division tot time counter
+#include"./research.h" //another float func similar to fdiv and fsub but also has a per second timer
+#include"../SimpleDB/simpledb.h" //this is the libsimpldbc : a c driver for our databse called SimpleDB
 
 typedef unsigned long long ll;
 

@@ -1,6 +1,7 @@
 *.o
 *.exe
 *.txt
+*.a
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles

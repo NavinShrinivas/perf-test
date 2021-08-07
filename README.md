@@ -11,38 +11,33 @@
 
 
 # Project Info:
+To build this project , you CMake , as of yet this may seem like over engineering but , we plan on including Vcpkg , that would solve all our package problems at once.
+
 ## Usage:
   If on linux there is no need to add external libraries and simply do :
   ```
   $ git clone https://github.com/NavinShrinivas/perf-test
-  
-  $ cd perf-test/src
-  
-  $ make all 
-  
-  $ cd .. && cd build/executables
-  
-  $ ./tester.o
+  $ cd perf-test
+  $ cmake .
+  $ make
+  $ ./perftool
   ```
+  *As of now build system and program is broken in windows , but by any means go ahead and give it a try*
   If on windows 10 , I ask you to google and add pthread h and dll files to mingw path and do :
   ```
   git clone https://github.com/NavinShrinivas/perf-test
-  
   cd perf-test/src
-  
   make winall
-  
   cd .. && cd build/executables
-  
   tester.exe
   ```
  To see all the possible modules you must execute
  ```
- ./tester.exe help
+ ./perftool help
  ```
 ## Acess style:
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
-  ```./tester.o menu```
+  ```./perftool menu```
 
 ## Some problems we ran into during this project :
 * Multithreading was one of the most major one's , deciding where the controls flow ,etc. , etc.

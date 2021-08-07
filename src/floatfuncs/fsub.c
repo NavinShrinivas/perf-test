@@ -30,7 +30,7 @@ SOFTWARE.
 #include<unistd.h>
 #include<stdbool.h>
 #include<time.h>
-#include"../FLOPanalyzer.h"
+#include"./FLOPanalyzer.h"
 typedef unsigned long long ll;
 
 void* fsubtf(void *oppthread) //our thread function
