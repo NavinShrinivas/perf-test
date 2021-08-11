@@ -90,7 +90,7 @@ void dbread(char* host , char* username, char* password , char* file)
         }
         fclose(f2);fclose(f1);
     }
-    curl_easy_cleanup(curl);remove("new.txt");
+    curl_easy_cleanup(curl);
 }
 
 void dbwrite(char* host , char* username, char* password , char* data)

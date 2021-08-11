@@ -81,7 +81,7 @@ int initfloptest(){
         printf("Possible errors: \n");
         printf("[time] < 4 \n");
         printf("[threads] < 2 OR threads not in multiples of 2 \n");
-        printf("Press Enter to go back to return.");
+        printf("Press Enter to go back or return.");
         scanf("%c",&garbage);
         scanf("%c",&garbage);   
         return 0;
@@ -189,20 +189,23 @@ int initfloptest(){
         printf("Do you want to upload these results to the web?[Y/N] : ");
         scanf("%[^\n]%*c",option1);
         if(strcmp(option1,accept)==0)
-            dbwrite("http://navin.works:8080/","stdtest","*****",data); //invoking from from libsimpledbc
+            dbwrite("http://navin.works:8080/","stdtest","*",data); //invoking from from libsimpledbc
 
         char option2[3];
         printf("Do you want to see rankings?[Y/N] : ");
         scanf("%[^\n]%*c",option2);
         if(strcmp(option2,accept)==0){
-            dbread("http://navin.works:8080/","stdtest","*****","STDOUT");
-            dbread("http://navin.works:8080/","stdtest","*****","leaderboard.txt");
+            // dbread("http://navin.works:8080/","stdtest","*","STDOUT");
+            dbread("http://navin.works:8080/","stdtest","*","leaderboard.txt");
+            
+            /*Leaderboard.txt needs sorting and has to be displayed to terminal*/
+
             char cwd[1000];
             getcwd(cwd,sizeof(cwd));
             printf("Results flushed to %s/leaderboards.txt \n",cwd);
         }
     }
-    printf("Press Enter to go back to return.");
+    printf("Press Enter to go back or return.");
     scanf("%c",&garbage);  
     fflush(stdout);
     fflush(stdin);
@@ -257,7 +260,7 @@ int research(){
     printf("Graphs stored and rendered!\n");
     /*we should have this part plotting data from "results.txt"*/
     //not coded yet
-    printf("Press Enter to go back to return.");
+    printf("Press Enter to go back or return.");
     scanf("%c",&garbage);
     fflush(stdout);
     fflush(stdin);

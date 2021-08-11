@@ -14,10 +14,11 @@ else
     echo "Starting install process"
     mkdir buildenv
     git clone https://github.com/Microsoft/vcpkg.git ./buildenv/vcpkg
-    # ./buildenv/vcpkg/bootstrap-vcpkg.sh
+    ./buildenv/vcpkg/bootstrap-vcpkg.sh
     cd ./buildenv/vcpkg/
     ./vcpkg install curl
     # vcpkg install pthreads "not needed for linux , i.e a shell script"
     cd .. && cd ..
     cmake . -DCMAKE_TOOLCHAIN_FILE=./buildenv/vcpkg/scripts/buildsystems/vcpkg.cmake
+    make
 fi
