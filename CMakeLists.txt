@@ -11,11 +11,16 @@ file(GLOB simpledbsrc "./src/SimpleDB/*.c")
 add_library(floatfunc STATIC ${floatfuncsrc})
 add_library(simpledb STATIC ${simpledbsrc})
 
+#Vcpkg libaries
+find_package(CURL REQUIRED)
+include_directories(${CURL_INCLUDE_DIRS})
+
 
 add_executable(perftool "./src/main.c") #building main src
 
 #[[Linking libaries to main object file]]
 target_link_libraries(perftool floatfunc simpledb) #two programmer written
-target_link_libraries(perftool curl pthread) #two imported libaries
+target_link_libraries(perftool pthread ${CURL_LIBRARIES}) #two imported libaries
+
 
 
