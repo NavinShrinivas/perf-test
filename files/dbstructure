@@ -1,7 +1,0 @@
-{   "_id":{"$oid":"60d9ef424c54a6627f757199"},
-    "TestID":{"$numberLong":"0"},
-    "TestScores":{"$numberLong":"0"},
-    "CpuName":"testentry",
-    "Threads":{"$numberLong":"0"},
-    "Copy":{"$numberLong":"0"}
-}
