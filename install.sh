@@ -10,7 +10,7 @@ elif [[ "$1" == "--install" ]]; then
     echo "This script will install the following packages and libaries"
     echo "1.Vcpkg [Package]"
     echo "2.Curl [Libaries]"
-    echo "3.Pthreads [Library]" echo "" echo ""
+    echo "3.Pthreads [Library]"
     read -p $'\n\nContinue with installation [Y/n] :' option
     if [[ "$option" == "n" ]]; then
         echo "See you later , bye bye :)"
