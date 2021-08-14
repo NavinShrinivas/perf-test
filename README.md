@@ -16,29 +16,16 @@
 To build this project , you CMake , as of yet this may seem like over engineering but , we plan on including Vcpkg , that would solve all our package problems at once.
 
 ## Usage:
+### Linux
   If on linux there is no need to add external libraries and simply do :
   ```
   $ git clone https://github.com/NavinShrinivas/perf-test
   $ cd perf-test
-  $ cmake .
-  $ make
+  $ chmod +x install.sh
+  $ install.sh
   $ ./perftool
   ```
-  *As of now build system and program is broken in windows , but by any means go ahead and give it a try*
-  If on windows 10 , I ask you to google and add pthread h and dll files to mingw path and do :
-  ```
-  git clone https://github.com/NavinShrinivas/perf-test
-  cd perf-test/src
-  
-  make -f manualmake.mk 
-  
-  cd .. && cd build/executables
-  tester.exe
-  ```
- To see all the possible modules you must execute
- ```
- ./perftool help
- ```
+  before executing the above commands make sure cmake is installed in your system
 ## Acess style:
   the entire program is fully acessible through commands in the terminal , but also can be used as a menu driven program with 
   ```./perftool menu```
