@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
     if(argc >= 2){
         printf("Argument entered :%s \n",argv[1]);
         if(strcmp(argv[1],"help") == 0){
-            printf("Usage : ./tester.o [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
+            printf("Usage : ./perftool [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
             printf("List of available options:\n");
             printf("1.floptest\n");
             printf("   Arguments :\n");
@@ -76,7 +76,7 @@ int main(int argc, char* argv[]){
         }
         else if(strcmp(argv[1],"floptest") == 0){
             if(argc < 4)
-                printf("\t Usage : ./tester.o floptest [Number of threads] [time in seconds]\n");
+                printf("\t Usage : ./pertool floptest [Number of threads] [time in seconds]\n");
             else{
                 total_thread=atoi(argv[2]); //extern vars, I am sick of passing variables around.
                 t=atoi(argv[3]); //extern vars, I am sick of passing variables around.
@@ -145,14 +145,14 @@ int main(int argc, char* argv[]){
         }
         else{
             printf("Please enter a valid argument!\n\n");
-            printf("Do: \n\t./tester.o help\nTo see all possible modules and arguments");
+            printf("Do: \n\t./perftool help\nTo see all possible modules and arguments");
             return 0;
         }
         
     }
     else{
         printf("Please enter a argument!\n\n");
-        printf("Do: \n\t./tester.o help\nTo see all possible modules and arguments.\n");
+        printf("Do: \n\t./perftool help\nTo see all possible modules and arguments.\n");
         return 0;
     } 
 }
