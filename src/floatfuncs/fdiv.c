@@ -43,9 +43,9 @@ void* fdivtf(void *oppthread) //our thread function
     register double v7=0.9786575454e-5,v8=0.6754645345e-6;
     register double v9=0.2345435677e-2,v10=0.6876798956e-4;
     clock_t start;
-    start=time(NULL);
+    start=time(NULL); //function start
     bool flag=true;
-    while(flag)
+    while(flag) 
     {
         c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;
         c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;
@@ -89,7 +89,7 @@ void* fdivtf(void *oppthread) //our thread function
         c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;c/=v1/v2/v3/v4/v5;c/=v6/v7/v8/v9/v10;
         int op=160*5;
         *((ll *)oppthread)+=op;
-        if(time(NULL)-start>=(t/4))
+        if(time(NULL)-start>=(t/2))
         {
             flag=false;
         }

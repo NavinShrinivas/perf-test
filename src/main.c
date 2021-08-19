@@ -46,14 +46,9 @@ char garbage;
 
 int main(int argc, char* argv[]){
     //---------------------------------------------
-    #if _WIN32
-    SYSTEM_INFO sysinfo;
-    GetSystemInfo(&sysinfo);
-    #define cores sysinfo.dwNumberOfProcessors
-    #else
     #define cores sysconf(_SC_NPROCESSORS_ONLN)
-    #endif
     //---------------------------------------------
+
     if(argc >= 2){
         printf("Argument entered :%s \n",argv[1]);
         if(strcmp(argv[1],"help") == 0){
@@ -131,9 +126,8 @@ int main(int argc, char* argv[]){
             }
         }
         else if(strcmp(argv[1],"stdtest") == 0){
-            stdflag=1;
             total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=10; //extern vars, I am sick of passing variables around.
+            t=60; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }

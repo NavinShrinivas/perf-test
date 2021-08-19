@@ -68,6 +68,8 @@ ease of scripting*/
 //custom and standard tests are handled by this function
 int initfloptest(){ 
     char* garbage;//used to "presss enter to return lines"
+
+
     if(total_thread==0){    //for optional menu options!
         printf("Enter total number of threads : ");
         scanf("%i",&total_thread);
@@ -76,6 +78,8 @@ int initfloptest(){
         printf("Time to run the test [Seconds] : ");
         scanf("%i",&t);
     }
+
+
     if(t<=4 || total_thread <=1 | total_thread%2!=0){   //checking for invalid params from user
         printf("Invalid arguments \n");
         printf("Possible errors: \n");
@@ -189,14 +193,14 @@ int initfloptest(){
         printf("Do you want to upload these results to the web?[Y/N] : ");
         scanf("%[^\n]%*c",option1);
         if(strcmp(option1,accept)==0)
-            dbwrite("http://navin.works:8080/","stdtest","*",data); //invoking from from libsimpledbc
+            dbwrite("http://navin.works:8080/","stdtest","password",data); //invoking from from libsimpledbc
 
         char option2[3];
         printf("Do you want to see rankings?[Y/N] : ");
         scanf("%[^\n]%*c",option2);
         if(strcmp(option2,accept)==0){
             // dbread("http://navin.works:8080/","stdtest","*","STDOUT");
-            dbread("http://navin.works:8080/","stdtest","*","leaderboard.txt");
+            dbread("http://navin.works:8080/","stdtest","passsword","leaderboard.txt");
             
             /*Leaderboard.txt needs sorting and has to be displayed to terminal*/
 
@@ -258,8 +262,16 @@ int research(){
     getcwd(cwd,sizeof(cwd));
     printf("Results flushed to %s/results.txt \n",cwd);
     printf("Graphs stored and rendered!\n");
+
+
     /*we should have this part plotting data from "results.txt"*/
-    //not coded yet
+    FILE* gnu=popen("gnuplot -persistent","w"); 
+    //popen can open a input buffer , even for a terminal command
+    fprintf(gnu, "plot 'result.txt' with lines\n");
+    fflush(gnu);
+    fclose(gnu);
+    //-------------------------------------------------------------
+
     printf("Press Enter to go back or return.");
     scanf("%c",&garbage);
     fflush(stdout);
