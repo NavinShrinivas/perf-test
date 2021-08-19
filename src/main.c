@@ -39,18 +39,22 @@ SOFTWARE.
 #include<unistd.h>
 #endif
 
+//to clear terminal when needed
+
 #include "./floatfuncs/FLOPanalyzer.h"
 
 
 char garbage;
 
 int main(int argc, char* argv[]){
+
     //---------------------------------------------
     #define cores sysconf(_SC_NPROCESSORS_ONLN)
     //---------------------------------------------
 
     if(argc >= 2){
         printf("Argument entered :%s \n",argv[1]);
+
         if(strcmp(argv[1],"help") == 0){
             printf("Usage : ./perftool [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
             printf("List of available options:\n");
@@ -125,9 +129,14 @@ int main(int argc, char* argv[]){
                 }
             }
         }
+
+        //stdtest : on all thread for 60 seconds
+        //floptest : custom number of threads and custom time
+        //research : on all thread for 60 seconds , gives a graph in the end to indicate thermals
+        
         else if(strcmp(argv[1],"stdtest") == 0){
             total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=60; //extern vars, I am sick of passing variables around.
+            t=10; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }

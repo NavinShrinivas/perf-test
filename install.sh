@@ -34,3 +34,6 @@ elif [[ "$1" == "--install" ]]; then
 else
     echo "Please enter a valid argument!"
 fi
+
+#shell script , disctors package manager to get basic program , Vcpkg to get more specific needed 
+#packaged , cmake to tie up C and Vcpkg , it compies the program to give "perftool"

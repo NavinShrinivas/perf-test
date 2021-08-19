@@ -94,7 +94,7 @@ int initfloptest(){
     fflush(stdout);
 
     //==========creating our array of threads==========
-    struct opscount opcount[total_thread];
+    struct opscount opcount[total_thread]; //simply used an array instead  .race conditions , event
     pthread_t thread[total_thread];
 
 
@@ -107,7 +107,7 @@ int initfloptest(){
 
     for(int i=0;i<total_thread;i++){
         subarr[i]=0;
-        pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); 
+        pthread_create(&thread[i],NULL,fsubtf,&subarr[i]); //waiting for return NULL 
         //creates the thread NOTE : the thread fn has a timer inbuilt hence control need not be transferred
     }
     int optime=t/4;//time per function
@@ -175,12 +175,12 @@ int initfloptest(){
     /*this flag mainly sets the time and number of cores , and takes care of uploading results to 
     database and also retrive data and display them*/
     if(stdflag)  {
-        char data[3000];
+        char data[300]="";
         char cpu[200];
         fflush(stdin);
         fflush(stdout);
         printf("Enter CPU Name [ENTER MODEL NUMBER ONLY WITH NO SPACE]:");
-        scanf(" %[^\n]%*c",cpu);
+        scanf("%s",cpu);
         strcat(data,cpu);
         int testresult=(fdivgflop/3)+(fsubgflop/1.5);
         char res[100];
@@ -189,18 +189,18 @@ int initfloptest(){
         strcat(data,res);
         char accept[]="Y";
         char option1[3];
-        printf("Results : %s\n",data);
+        printf("Results:%s\n",data);
         printf("Do you want to upload these results to the web?[Y/N] : ");
-        scanf("%[^\n]%*c",option1);
+        scanf("\t%s",option1);
         if(strcmp(option1,accept)==0)
             dbwrite("http://navin.works:8080/","stdtest","password",data); //invoking from from libsimpledbc
 
         char option2[3];
         printf("Do you want to see rankings?[Y/N] : ");
-        scanf("%[^\n]%*c",option2);
+        scanf("\t%s",option2);
         if(strcmp(option2,accept)==0){
             // dbread("http://navin.works:8080/","stdtest","*","STDOUT");
-            dbread("http://navin.works:8080/","stdtest","passsword","leaderboard.txt");
+            dbread("http://navin.works:8080/","stdtest","password","leaderboard.txt");
             
             /*Leaderboard.txt needs sorting and has to be displayed to terminal*/
 
@@ -226,7 +226,7 @@ int research(){
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     ll tsecbuffer2;
-    for(int j=0;j<30;j++){
+    for(int j=0;j<15;j++){
         if(j==0)
             tsec[j]=0;
         else{

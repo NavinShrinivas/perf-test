@@ -36,9 +36,9 @@ SOFTWARE.
 #endif
 #include<ctype.h>
 
-void dbread(char* host , char* username, char* password , char* file)
+void dbread(char* host , char* username, char* password , char* file) //file : output file
 {
-    CURL *curl;
+    CURL* curl;
     FILE* f=fopen("new.txt","w+");
     curl = curl_easy_init(); 
     CURLcode res;

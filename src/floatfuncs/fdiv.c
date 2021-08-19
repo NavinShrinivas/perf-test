@@ -33,7 +33,7 @@ SOFTWARE.
 #include"./FLOPanalyzer.h"
 typedef unsigned long long ll;
 
-void* fdivtf(void *oppthread) //our thread function
+void* fdivtf(void *oppthread) //our thread function //pthread , can only pass over void*
 {
     /*registers to avoid caching and to save the time taken to fetch data from
     memory*/
@@ -41,7 +41,7 @@ void* fdivtf(void *oppthread) //our thread function
     register double v1=0.3452345543e-2,v2=0.2342342344e-5,v3=0.2534534523e-4;
     register double v4=0.6575676788e-5,v5=0.2345564656e-2,v6=0.3456573453e-3;
     register double v7=0.9786575454e-5,v8=0.6754645345e-6;
-    register double v9=0.2345435677e-2,v10=0.6876798956e-4;
+    register double v9=0.2345435677e-2,v10=0.6876798956e-4; //to reduce latency or time waste due to memory operations
     clock_t start;
     start=time(NULL); //function start
     bool flag=true;
