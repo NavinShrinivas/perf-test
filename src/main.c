@@ -136,7 +136,7 @@ int main(int argc, char* argv[]){
         
         else if(strcmp(argv[1],"stdtest") == 0){
             total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=10; //extern vars, I am sick of passing variables around.
+            t=60; //extern vars, I am sick of passing variables around.
             stdflag=1;
             initfloptest();
         }

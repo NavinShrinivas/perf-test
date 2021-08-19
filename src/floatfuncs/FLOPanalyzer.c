@@ -226,7 +226,7 @@ int research(){
     pthread_t thread[total_thread];
     printf("Running test for %i seconds on %d threads!\n",t,total_thread);
     ll tsecbuffer2;
-    for(int j=0;j<15;j++){
+    for(int j=0;j<30;j++){
         if(j==0)
             tsec[j]=0;
         else{
