@@ -1,6 +1,5 @@
 > :warning: **All the code present in this repository must be run preferably on a virtual machine as there is a possibility the code can harm the machine!Any how a force reboot should fix it.**
 
-<b><p>Note : This project is also a part of UE20CS152 course</p></b>
 # Perf-test
 
 
@@ -8,12 +7,10 @@
 ## Project Contributors:
 
 * [Rahul Samal](https://github.com/Omicron02)
-* [P K Navin Shrinivas ](https://github.com/NavinShrinivas)
-* [Praneeth K L](https://github.com/praneethk002)
 
 
 # Project Info:
-To build this project , you CMake , as of yet this may seem like over engineering but , we plan on including Vcpkg , that would solve all our package problems at once.
+To build this project , you CMake , as of yet this may seem like over engineering but this becomes a must to get the program running on multiple platforms , that would solve all our package problems at once.
 
 ## Usage:
 ### Linux
