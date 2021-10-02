@@ -12,11 +12,11 @@ fdiv.o : ./src/floatfuncs/fdiv.c
 	gcc -c ./src/floatfuncs/fdiv.c -o ./build/fdiv.o -O0
 research.o : ./src/floatfuncs/research.c
 	gcc -c ./src/floatfuncs/research.c -o ./build/research.o -O0
-FLOPanalyzer.o : ./src/FLOPanalyzer.c
-	gcc -c ./src/FLOPanalyzer.c -o ./build/FLOPanalyzer.o -lpthread -O0
-tester.o : ./src/main.c ./src/FLOPanalyzer.c
+FLOPanalyzer.o : ./src/floatfuncs/FLOPanalyzer.c
+	gcc -c ./src/floatfuncs/FLOPanalyzer.c -o ./build/FLOPanalyzer.o -lpthread -O0
+tester.o : ./src/main.c ./src/floatfuncs/FLOPanalyzer.c
 	gcc ./build/simpledb.o ./build/fdiv.o ./build/fsub.o ./build/research.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.o -pthread -lcurl -O0
-tester.exe :  ./src/main.c ./src/FLOPanalyzer.c
+tester.exe :  ./src/main.c ./src/floatfuncs/FLOPanalyzer.c
 	gcc ./build/simpledb.o ./build/fdiv.o ./build/fsub.o ./build/research.o ./build/FLOPanalyzer.o ./src/main.c -o ./build/executables/tester.exe -pthread -lcurl -O0 -I "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\include"
 clean:
 	rm -r ./build/FLOPanalyzer.o;\
