@@ -4,6 +4,12 @@
 
 if [[ "$1" == "--reset" ]]; then
     sudo rm -r ./buildenv
+elif [[ "$1" == "--easyinstall" ]]; then
+    echo "You have invoked easy install"
+    echo "this way of building expects you to have gotten all the needed packages manually"
+    make -f ManualMake.mk all
+    mv ./build/executables/tester.o ./
+    mv ./tester.o ./perftool 
 elif [[ "$1" == "--install" ]]; then
     echo "==========PERF-TOOL=========="
     echo "This is a command line installer for our tool."
