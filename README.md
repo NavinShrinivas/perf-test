@@ -6,7 +6,7 @@
 
 ## Project Contributors:
 
-* [Rahul Samal](https://github.com/Omicron02)
+* [Navin Shrinivas](https://github.com/NavinShrinivas)
 
 
 # Project Info:
