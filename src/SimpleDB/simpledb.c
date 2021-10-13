@@ -27,6 +27,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **********************************************************************************/
 
+
+/*Author : Navin Shrinivas*/
+
+
 #include<stdio.h>
 #include<string.h>
 #if _WIN32
