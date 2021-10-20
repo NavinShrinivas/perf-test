@@ -44,7 +44,9 @@ SOFTWARE.
 #include "./floatfuncs/FLOPanalyzer.h"
 
 
-char garbage;
+char garbage; //variabe declaration
+
+//this is the main() function, from where compiler executes the code.
 
 int main(int argc, char* argv[]){
 
