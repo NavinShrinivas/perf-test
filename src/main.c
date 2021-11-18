@@ -1,10 +1,10 @@
 /**********************************************************************************
-                  __ _              _ 
+                  __ _              _
  _ __   ___ _ __ / _| |_ ___   ___ | |
 | '_ \ / _ \ '__| |_| __/ _ \ / _ \| |
 | |_) |  __/ |  |  _| || (_) | (_) | |
 | .__/ \___|_|  |_|  \__\___/ \___/|_|
-|_|  
+|_|
 
 Copyright (c) 2021 P K Navin Shrinivas
 
@@ -27,135 +27,133 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **********************************************************************************/
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef _WIN32 //trying portable clrscr() and NPROESSORS_ONLN macro
+#ifdef _WIN32 // trying portable clrscr() and NPROESSORS_ONLN macro
 #define clrscr() system("cls")
-#include<windows.h>
+#include <windows.h>
 #else
 #define clrscr() system("clear")
-#include<unistd.h>
+#include <unistd.h>
 #endif
 
-//to clear terminal when needed
+// to clear terminal when needed
 
 #include "./floatfuncs/FLOPanalyzer.h"
 
-
 char garbage;
 
-int main(int argc, char* argv[]){
+int main(int argc, char *argv[]) {
 
-    //---------------------------------------------
-    #define cores sysconf(_SC_NPROCESSORS_ONLN)
-    //---------------------------------------------
+//---------------------------------------------
+#define cores sysconf(_SC_NPROCESSORS_ONLN)
+  //---------------------------------------------
+  system("figlet -w 100 PerfTool");
+  if (argc >= 2) {
+    printf("Argument entered :%s \n", argv[1]);
 
-    if(argc >= 2){
-        printf("Argument entered :%s \n",argv[1]);
-
-        if(strcmp(argv[1],"help") == 0){
-            printf("Usage : ./perftool [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
-            printf("List of available options:\n");
-            printf("1.floptest\n");
-            printf("   Arguments :\n");
-            printf("   option_name : floptest \n");
-            printf("   Arg1 : Total number of threads\n");
-            printf("   Arg2 : Total time for testing\n");
-            printf("2.menu\n");
-            printf("   option_name : menu \n");
-            printf("   Arguments : NO ARGUMENTS\n");
-            printf("3.stdtest\n");
-            printf("   option_name : stdtest \n");
-            printf("   Arguments : NO ARGUMENTS\n");
-            printf("4.research\n");
-            printf("   option_name : research \n");
-            printf("   Arguments : NO ARGUMENTS\n");
+    if (strcmp(argv[1], "help") == 0) {
+      printf(
+          "Usage : ./perftool [option_name] [Arg1] [Arg2] [Arg3] ... [ArgN]\n");
+      printf("List of available options:\n");
+      printf("1.floptest\n");
+      printf("   Arguments :\n");
+      printf("   option_name : floptest \n");
+      printf("   Arg1 : Total number of threads\n");
+      printf("   Arg2 : Total time for testing\n");
+      printf("2.menu\n");
+      printf("   option_name : menu \n");
+      printf("   Arguments : NO ARGUMENTS\n");
+      printf("3.stdtest\n");
+      printf("   option_name : stdtest \n");
+      printf("   Arguments : NO ARGUMENTS\n");
+      printf("4.research\n");
+      printf("   option_name : research \n");
+      printf("   Arguments : NO ARGUMENTS\n");
+    } else if (strcmp(argv[1], "floptest") == 0) {
+      if (argc < 4)
+        printf("\t Usage : ./pertool floptest [Number of threads] [time in "
+               "seconds]\n");
+      else {
+        total_thread = atoi(
+            argv[2]); // extern vars, I am sick of passing variables around.
+        t = atoi(argv[3]); // extern vars, I am sick of passing variables
+                           // around.
+        initfloptest();
+      }
+    } else if (strcmp(argv[1], "menu") == 0) {
+      int choice;
+      while (1) {
+        clrscr();
+        // menu
+        printf("---------------HARDWARE TESTER---------------\n");
+        printf("1.Custom Floating point operation test\n");
+        printf("2.Standard test [60 seconds] for ranking \n");
+        printf("3.Research based test\n");
+        printf("4.Exit\n");
+        printf("Enter your choice :");
+        scanf("%i", &choice);
+        if (choice == 1) {
+          stdflag = 0;
+          // t=0;
+          // total_thread=0;
+          clrscr();
+          initfloptest();
+          clrscr();
+        } else if (choice == 2) {
+          stdflag = 1;
+          total_thread = cores;
+          t = 60;
+          stdflag = 1;
+          clrscr();
+          initfloptest();
+          clrscr();
+        } else if (choice == 3) {
+          stdflag = 0;
+          total_thread = cores;
+          t = 60;
+          clrscr();
+          research();
+          clrscr();
+        } else if (choice == 4)
+          return 0;
+        else {
+          printf("Please enter a correct option.Press enter to continue!");
+          fflush(stdout);
+          fflush(stdin);
+          scanf("%c", &garbage);
         }
-        else if(strcmp(argv[1],"floptest") == 0){
-            if(argc < 4)
-                printf("\t Usage : ./pertool floptest [Number of threads] [time in seconds]\n");
-            else{
-                total_thread=atoi(argv[2]); //extern vars, I am sick of passing variables around.
-                t=atoi(argv[3]); //extern vars, I am sick of passing variables around.
-                initfloptest();
-            }
-        }
-        else if(strcmp(argv[1],"menu") == 0){ 
-            int choice;
-            while(1){
-                clrscr();
-                //menu
-                printf("---------------HARDWARE TESTER---------------\n");
-                printf("1.Custom Floating point operation test\n");
-                printf("2.Standard test [60 seconds] for ranking \n");
-                printf("3.Research based test\n");
-                printf("4.Exit\n");
-                printf("Enter your choice :");
-                scanf("%i",&choice);
-                if(choice == 1){
-                    stdflag=0;
-                    // t=0;
-                    // total_thread=0;
-                    clrscr();
-                    initfloptest();
-                    clrscr();
-                }
-                else if(choice == 2){
-                    stdflag=1;
-                    total_thread=cores;
-                    t=60;
-                    stdflag=1;
-                    clrscr();
-                    initfloptest();
-                    clrscr();
-                }
-                else if(choice == 3){
-                    stdflag=0;
-                    total_thread=cores;
-                    t=60;
-                    clrscr();
-                    research();
-                    clrscr();
-                }
-                else if(choice == 4)
-                    return 0;
-                else{
-                    printf("Please enter a correct option.Press enter to continue!");
-                    fflush(stdout);
-                    fflush(stdin);  
-                    scanf("%c",&garbage);
-                }
-            }
-        }
-
-        //stdtest : on all thread for 60 seconds
-        //floptest : custom number of threads and custom time
-        //research : on all thread for 60 seconds , gives a graph in the end to indicate thermals
-        
-        else if(strcmp(argv[1],"stdtest") == 0){
-            total_thread=cores; //extern vars, I am sick of passing variables around.
-            t=60; //extern vars, I am sick of passing variables around.
-            stdflag=1;
-            initfloptest();
-        }
-        else if(strcmp(argv[1],"research") == 0){
-            stdflag=0;
-            t=60;
-            total_thread=cores;
-            research();
-        }
-        else{
-            printf("Please enter a valid argument!\n\n");
-            printf("Do: \n\t./perftool help\nTo see all possible modules and arguments");
-            return 0;
-        }
-        
+      }
     }
-    else{
-        printf("Please enter a argument!\n\n");
-        printf("Do: \n\t./perftool help\nTo see all possible modules and arguments.\n");
-        return 0;
-    } 
+
+    // stdtest : on all thread for 60 seconds
+    // floptest : custom number of threads and custom time
+    // research : on all thread for 60 seconds , gives a graph in the end to
+    // indicate thermals
+
+    else if (strcmp(argv[1], "stdtest") == 0) {
+      total_thread =
+          cores; // extern vars, I am sick of passing variables around.
+      t = 60;    // extern vars, I am sick of passing variables around.
+      stdflag = 1;
+      initfloptest();
+    } else if (strcmp(argv[1], "research") == 0) {
+      stdflag = 0;
+      t = 60;
+      total_thread = cores;
+      research();
+    } else {
+      printf("Please enter a valid argument!\n\n");
+      printf(
+          "Do: \n\t./perftool help\nTo see all possible modules and arguments");
+      return 0;
+    }
+  } else {
+    printf("Please enter a argument!\n\n");
+    printf("Do: \n\t./perftool help\nTo see all possible modules and "
+           "arguments.\n");
+    return 0;
+  }
 }
